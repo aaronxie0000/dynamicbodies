@@ -42,8 +42,5 @@
   <actuator>
     <position class="simplerobot" name="knee" joint="knee" ctrlrange="-5.017460702273549 0.043994128510006725"/>
   </actuator>
-  <keyframe>
-    <key name="spinning" qpos="0 0 0.02 1 0 0 0 10" qvel="0 0 0 0 1 200 5" />
-  </keyframe>
   <equality/>
 </mujoco>
