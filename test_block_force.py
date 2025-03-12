@@ -1,28 +1,44 @@
 import mujoco
 import mujoco.viewer
-import numpy as np
 import time
+import numpy as np
+from motion_controller import compute_torque
 
-# Load the scene file which includes both the robot and floor
-model = mujoco.MjModel.from_xml_path("simplerobot/scene.xml")
+
+model = mujoco.MjModel.from_xml_path("scene.xml")
 data = mujoco.MjData(model)
 
-# mujoco.mj_resetData(model, data)
+mujoco.mj_resetData(model, data)
 
-# mujoco.mj_resetDataKeyframe(model, data, 0)
+def key_callback(key):
+    if chr(key) == ' ':
+        data.qpos = np.zeros(len(data.qpos))
+        data.qvel = np.zeros(len(data.qvel))
+    elif chr(key) == 'R':
+        data.qpos[0] = 3
 
-# Apply a control to the 'knee' joint to make it rotate
-# Ensure the control value is within the actuator's control range
-control_value = 1.0  # Adjust the control value as needed
-data.ctrl[model.actuator('knee_actuator').id] = control_value
 
-print(f"Applying control: {control_value}")
+model.opt.timestep = 0.001 # 0.001 = 1000hz
 
-with mujoco.viewer.launch_passive(model, data) as viewer:
+# breakpoint()
+
+with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as viewer:
+    target_time = time.time()
     while viewer.is_running():
+
+        # data.ctrl = compute_torque(3.14, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
+        data.ctrl = -10
+        # data.cfrc_ext[0]
         mujoco.mj_step(model, data)
         viewer.sync()
-        # Debugging output to check joint position and control
-        print(f"Joint position: {data.qpos[model.joint('knee').qposadr]}")
-        print(f"Control input: {data.ctrl[model.actuator('knee_actuator').id]}")
+
+        print(data.body("toplink").cfrc_int)
+        print(data.body("toplink").cfrc_ext)
+        
+        target_time += model.opt.timestep
+        current_time = time.time()
+        if target_time - current_time > 0:
+            time.sleep(target_time - current_time)
+
+
 

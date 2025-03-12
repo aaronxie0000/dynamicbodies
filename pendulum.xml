@@ -1,0 +1,52 @@
+<mujoco>
+  <option timestep=".001"></option>
+
+  <default>
+    <joint type="hinge" axis="0 -1 0"/>
+    <geom type="capsule" size=".02"/>
+    <!-- Visual geoms will have these properties -->
+    <default class="visual">
+      <geom contype="0" conaffinity="0" group="1"/>
+    </default>
+    <!-- Collision geoms will have these properties -->
+    <default class="collision">
+      <geom contype="2" conaffinity="2" rgba="0.5 0.5 0.5 0.3" group="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <body name="toplink" pos="0 0 .3">
+      <joint name="root"/>
+      <!-- Visual geom for toplink -->
+      <geom name="toplink_visual" class="visual" fromto="0 0 0 0 0 -.25" rgba="1 0.3 0.3 1"/>
+      <!-- Collision geom for toplink -->
+      <geom name="toplink_collision" class="collision" fromto="0 0 0 0 0 -.25"/>
+      
+      <body name="bottomlink" pos="0 0 -.25" quat="0 0.7071068 0 0.7071068">
+        <joint name="actjoint" frictionloss="0.1" armature="0.005"/>
+        <!-- Visual geom for bottomlink -->
+        <geom name="bottomlink_visual" class="visual" fromto="0 0 0 0 0 -.2" rgba="1 1 1 1"/>
+        <!-- Collision geom for bottomlink -->
+        <geom name="bottomlink_collision" class="collision" fromto="0 0 -0.05 0 0 -.2"/>
+        
+        <!-- Adding a site for the force sensor -->
+        <site name="force_site" pos="0 0 -0.1" size="0.01"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <!-- Define explicit pair-wise contacts -->
+  <contact>
+    <pair geom1="toplink_collision" geom2="bottomlink_collision"/>
+  </contact>
+
+  <actuator>
+    <motor name="rs04joint" joint="actjoint" ctrlrange="-5 5"/>
+  </actuator>
+  
+  <!-- Adding the sensor section with a force sensor -->
+  <sensor>
+    <!-- Force sensor at the specified site -->
+    <force name="force_sensor" site="force_site"/>
+  </sensor>
+</mujoco>
