@@ -10,7 +10,7 @@
     </default>
     <!-- Collision geoms will have these properties -->
     <default class="collision">
-      <geom contype="2" conaffinity="2" rgba="0.5 0.5 0.5 0.3" group="0"/>
+      <geom contype="2" conaffinity="2" rgba="0.5 0.5 0.5 0.3" group="2"/>
     </default>
   </default>
 
