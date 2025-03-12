@@ -33,8 +33,7 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
         viewer.sync()
 
         print(data.body("toplink").cfrc_int)
-        print(data.body("toplink").cfrc_ext)
-        
+
         target_time += model.opt.timestep
         current_time = time.time()
         if target_time - current_time > 0:
