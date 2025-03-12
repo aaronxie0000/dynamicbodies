@@ -21,6 +21,9 @@
       <geom name="toplink_visual" class="visual" fromto="0 0 0 0 0 -.25" rgba="1 0.3 0.3 1"/>
       <!-- Collision geom for toplink -->
       <geom name="toplink_collision" class="collision" fromto="0 0 0 0 0 -.25"/>
+
+      <!-- Adding a site for the force sensor -->
+       <site name="force_site" pos="0.0 0.0 -0.1" size="0.01"/>
       
       <body name="bottomlink" pos="0 0 -.25" quat="0 0.7071068 0 0.7071068">
         <joint name="actjoint" frictionloss="0.1" armature="0.005"/>
@@ -28,9 +31,7 @@
         <geom name="bottomlink_visual" class="visual" fromto="0 0 0 0 0 -.2" rgba="1 1 1 1"/>
         <!-- Collision geom for bottomlink -->
         <geom name="bottomlink_collision" class="collision" fromto="0 0 -0.05 0 0 -.2"/>
-        
-        <!-- Adding a site for the force sensor -->
-        <site name="force_site" pos="0 0 -0.1" size="0.01"/>
+         
       </body>
     </body>
   </worldbody>

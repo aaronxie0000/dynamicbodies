@@ -6,8 +6,8 @@
   <option noslip_iterations="1"/>
   <default>
     <default class="simplerobot">
-      <joint frictionloss="0.001" armature="0.000"/>
-      <position kp="50" dampratio="1"/>
+      <!-- <joint frictionloss="0.001" armature="0.000"/>
+      <position kp="50" dampratio="1"/> -->
       <default class="visual">
         <geom type="mesh" contype="0" conaffinity="0" group="2"/>
       </default>

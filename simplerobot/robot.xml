@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/2c1a9ea726ba778192b72a4e/w/b6207ac2a48d2f0e2b0c806f/e/5529eb2044b8d16c2ecff529 -->
+<mujoco model="simplerobot">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <option noslip_iterations="1"/>
+  <default>
+    <default class="simplerobot">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link barlink -->
+    <body name="barlink" pos="0 0 0" quat="1 0 0 0" childclass="simplerobot">
+      <freejoint name="barlink_freejoint"/>
+      <inertial pos="-0.0546069 -0.0067155 0.0171" mass="0.490901" fullinertia="9.8476e-05 0.00119754 0.00124488 0 0 0"/>
+      <!-- Part barlink -->
+      <geom type="mesh" class="visual" pos="0.0129695 -0.0067155 0.00460001" quat="1 0 0 0" mesh="barlink" material="barlink_material"/>
+      <geom type="mesh" class="collision" pos="0.0129695 -0.0067155 0.00460001" quat="1 0 0 0" mesh="barlink" material="barlink_material"/>
+      <!-- Link barlink_2 -->
+      <body name="barlink_2" pos="0.0129695 -0.0067155 0.0296" quat="1.88268e-16 -0.854818 -0.518928 -1.79135e-16">
+        <!-- Joint from barlink to barlink_2 -->
+        <joint name="knee" type="hinge" range="-5.017460702273549 0.043994128510006725"/>
+        <inertial pos="-0.0675763 1.46584e-18 -0.0125" mass="0.490901" fullinertia="9.8476e-05 0.00119754 0.00124488 6.64767e-20 -1.13044e-34 -6.13772e-35"/>
+        <!-- Part barlink_2 -->
+        <geom type="mesh" class="visual" pos="8.67362e-19 0 0" quat="0 1 0 0" mesh="barlink" material="barlink_material"/>
+        <geom type="mesh" class="collision" pos="8.67362e-19 0 0" quat="0 1 0 0" mesh="barlink" material="barlink_material"/>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="barlink.stl"/>
+    <material name="barlink_material" rgba="0.615686 0.811765 0.929412 1"/>
+  </asset>
+  <actuator>
+    <position class="simplerobot" name="knee" joint="knee" ctrlrange="-5.017460702273549 0.043994128510006725"/>
+  </actuator>
+  <equality/>
+</mujoco>

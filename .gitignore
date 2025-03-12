@@ -1,3 +1,5 @@
 /kbot-v2
 /simplerobot/assets
 MUJOCO_LOG.txt
+force_data.json
+__pycache__
