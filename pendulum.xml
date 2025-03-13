@@ -42,7 +42,7 @@
   </contact>
 
   <actuator>
-    <motor name="rs04joint" joint="actjoint" ctrlrange="-5 5"/>
+    <motor name="rs04joint" joint="actjoint"/>
   </actuator>
   
   <!-- Adding the sensor section with a force sensor -->
