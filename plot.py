@@ -18,6 +18,10 @@ cols = 3
 rows = (num_plots + cols - 1) // cols  # Calculate rows needed for a 3-column layout
 fig, axs = plt.subplots(rows, cols, figsize=(10, 2 * rows))
 
+# Check if axs is a 1D array
+if num_plots == 1:
+    axs = [axs]
+
 # Function to plot forces in a subplot
 def plot_forces(ax, forces, title_prefix):
     num_components = len(forces[0])
@@ -30,14 +34,22 @@ def plot_forces(ax, forces, title_prefix):
 
 # Plot each force type in its own subplot
 for idx, key in enumerate(force_keys):
-    row, col = divmod(idx, cols)
+    if num_plots > 1:
+        row, col = divmod(idx, cols)
+        ax = axs[row, col] if rows > 1 else axs[col]
+    else:
+        ax = axs[0]
     forces = [entry[key] for entry in data]
-    plot_forces(axs[row, col], forces, key.replace('_', ' ').title())
+    plot_forces(ax, forces, key.replace('_', ' ').title())
 
 # Hide any unused subplots
-for idx in range(num_plots, rows * cols):
-    row, col = divmod(idx, cols)
-    axs[row, col].axis('off')
+if num_plots > 1:
+    for idx in range(num_plots, rows * cols):
+        row, col = divmod(idx, cols)
+        if rows > 1:
+            axs[row, col].axis('off')
+        else:
+            axs[col].axis('off')
 
 # Adjust layout
 plt.tight_layout()
