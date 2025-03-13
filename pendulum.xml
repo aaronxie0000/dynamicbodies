@@ -2,15 +2,15 @@
   <option timestep=".001"></option>
 
   <default>
-    <joint type="hinge" axis="0 -1 0"/>
+    <joint type="hinge" axis="0 -1 0" frictionloss="0.001" armature="0.005" />
     <geom type="capsule" size=".02"/>
     <!-- Visual geoms will have these properties -->
     <default class="visual">
-      <geom contype="0" conaffinity="0" group="1"/>
+      <geom density="0" contype="0" conaffinity="0" group="1"/>
     </default>
     <!-- Collision geoms will have these properties -->
     <default class="collision">
-      <geom contype="2" conaffinity="2" rgba="0.5 0.5 0.5 0.3" group="2"/>
+      <geom density="2700" contype="2" conaffinity="2" rgba="0.5 0.5 0.5 0.3" group="2"/>
     </default>
   </default>
 
