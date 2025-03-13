@@ -6,10 +6,14 @@ import json
 from motion_controller import compute_torque
 
 
+
 model = mujoco.MjModel.from_xml_path("scene.xml")
 data = mujoco.MjData(model)
 
 mujoco.mj_resetData(model, data)
+
+body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "bottomlink")
+applying_force = False
 
 def key_callback(key):
     if chr(key) == ' ':
@@ -17,6 +21,10 @@ def key_callback(key):
         data.qvel = np.zeros(len(data.qvel))
     elif chr(key) == 'R':
         data.qpos[0] = 3
+    elif chr(key) == 'Z':
+        global applying_force
+        applying_force = not applying_force
+
 
 
 model.opt.timestep = 0.001 # 0.001 = 1000hz
@@ -33,29 +41,31 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
 
     while viewer.is_running():
         # data.ctrl = compute_torque(3.14, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
-        data.ctrl = -10
+        data.ctrl = -5
+
+
+        if applying_force:
+            # breakpoint()
+            data.xfrc_applied[body_id, :3] = [10.0, 0.0, 10.0]
 
 
         # for j, c in enumerate(data.contact):
             # print(j)
+        
+        # for j, c in enumerate(data.contact):
+            # print(j)
 
+        print(f"Number of constraints: {data.nefc}")
         # Record data before stepping the simulation
         force_data = {
             "time": sim_time,
             "force_sensor": data.sensor("force_sensor").data.tolist(),
             "internal_force": data.body("toplink").cfrc_int.tolist(),
             "external_force": data.body("toplink").cfrc_ext.tolist(),
-            "contact_force": contact_force.tolist(),
-            "qfrc_constraint": data.qfrc_constraint.tolist(),
-            "qfrc_contraint2": data.efc_force.tolist(),
-            "qfrc_applied": data.qfrc_applied.tolist(),
-            "passive_force": data.qfrc_passive.tolist(),
-            "actuator_force": data.qfrc_actuator.tolist(),
-            "applied_force": (data.qfrc_passive + data.qfrc_actuator + data.qfrc_applied).tolist(),
-            "bias_force": data.qfrc_bias.tolist(),
         }
         recorded_data.append(force_data)
-        
+
+
         # Step simulation
         mujoco.mj_step(model, data)
         sim_time += model.opt.timestep
