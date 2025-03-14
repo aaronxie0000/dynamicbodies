@@ -7,12 +7,12 @@ from motion_controller import compute_torque
 
 
 
-model = mujoco.MjModel.from_xml_path("scene.xml")
+model = mujoco.MjModel.from_xml_path("pendulum.xml")
 data = mujoco.MjData(model)
 
 mujoco.mj_resetData(model, data)
 
-body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "bottomlink")
+body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "toplink")
 applying_force = False
 
 def key_callback(key):
@@ -24,6 +24,7 @@ def key_callback(key):
     elif chr(key) == 'Z':
         global applying_force
         applying_force = not applying_force
+        print(f"Applying force: {applying_force}")
 
 
 
@@ -37,33 +38,36 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
     contact_force = np.zeros((6,1), dtype=np.float64)
     sim_time = 0.0
 
-    viewer.opt.frame = True
+    # viewer.opt.frame = True
 
     while viewer.is_running():
         # data.ctrl = compute_torque(3.14, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
-        data.ctrl = -5
+        data.ctrl = 5
 
 
         if applying_force:
             # breakpoint()
-            data.xfrc_applied[body_id, :3] = [10.0, 0.0, 10.0]
+            data.xfrc_applied[body_id, :3] = [5.0, 0.0, 10.0]
 
-
-        # for j, c in enumerate(data.contact):
-            # print(j)
-        
-        # for j, c in enumerate(data.contact):
-            # print(j)
-
-        print(f"Number of constraints: {data.nefc}")
         # Record data before stepping the simulation
         force_data = {
             "time": sim_time,
+            "internal_force_toplink": data.body("toplink").cfrc_int.tolist(),
+            "external_force_toplink": data.body("toplink").cfrc_ext.tolist(),
+            "cfrc_ext": data.cfrc_ext.tolist(),
+            # "internal_force_bottomlink": data.body("bottomlink").cfrc_int.tolist(),
+            # "external_force_bottomlink": data.body("bottomlink").cfrc_ext.tolist(),
             "force_sensor": data.sensor("force_sensor").data.tolist(),
-            "internal_force": data.body("toplink").cfrc_int.tolist(),
-            "external_force": data.body("toplink").cfrc_ext.tolist(),
         }
         recorded_data.append(force_data)
+
+        if sim_time > 3.0:
+            print("internal force top link: ", data.body("toplink").cfrc_int)
+            print("external force top link: ", data.body("toplink").cfrc_ext)
+            # print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
+            # print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
+            print("force sensor: ", data.sensor("force_sensor").data.tolist())
+            breakpoint()
 
 
         # Step simulation
