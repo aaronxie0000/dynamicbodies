@@ -41,13 +41,13 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
     # viewer.opt.frame = True
 
     while viewer.is_running():
-        # data.ctrl = compute_torque(3.14, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
-        data.ctrl = 5
+        data.ctrl = compute_torque(0.0, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
+        # data.ctrl = 5
 
 
         if applying_force:
             # breakpoint()
-            data.xfrc_applied[body_id, :3] = [5.0, 0.0, 10.0]
+            data.xfrc_applied[body_id, :3] = [10.0, 0.0, 0.0]
 
         # Record data before stepping the simulation
         force_data = {
@@ -61,13 +61,14 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
         }
         recorded_data.append(force_data)
 
-        if sim_time > 3.0:
-            print("internal force top link: ", data.body("toplink").cfrc_int)
-            print("external force top link: ", data.body("toplink").cfrc_ext)
-            print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
-            print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
-            print("force sensor: ", data.sensor("force_sensor").data.tolist())
-            breakpoint()
+        # if sim_time > 5.0:
+        #     print("internal force top link: ", data.body("toplink").cfrc_int)
+        #     print("external force top link: ", data.body("toplink").cfrc_ext)
+        #     print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
+        #     print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
+        #     print("force sensor: ", data.sensor("force_sensor").data.tolist())
+        #     print("body masses: ", model.body_mass)
+        #     breakpoint()
 
 
         # Step simulation

@@ -33,13 +33,13 @@
      <body name="toplink" pos="0 0 .3">
         <joint name="root" type="free"/>
         <geom name="toplink_visual" class="visual" fromto="0 0 0 0 0 -0.23" rgba="1 0.3 0.3 1"/>
-        <geom name="toplink_collision" class="collision" fromto="0 0 0 0 0 -.23"/>
+        <geom name="toplink_collision" class="collision" fromto="0 0 0 0 0 -.20"/>
         <site name="force_site" pos="0.0 0.0 0.0" size="0.01"/>
       
       <body name="bottomlink" pos="0 0 -.25" quat="0 0.7071068 0 0.7071068">
-        <!-- <joint name="actjoint" frictionloss="0.1" armature="0.005"/> -->
-        <geom name="bottomlink_visual" class="visual" fromto="0 0 0.2 0 0 -.2" rgba="1 1 1 1"/>
-        <geom name="bottomlink_collision" class="collision" fromto="0 0 0.2 0 0 -.2"/>
+        <joint name="actjoint" type="hinge" axis="0 -1 0" frictionloss="0.001" armature="0.005"/>
+        <geom name="bottomlink_visual" class="visual" fromto="0 0 0 0 0 -.2" rgba="1 1 1 1"/>
+        <geom name="bottomlink_collision" class="collision" fromto="0 0 0 0 0 -.2"/>
       </body>
 
     </body>
@@ -54,7 +54,7 @@
     <force name="force_sensor" site="force_site" />
   </sensor>
 
-  <!-- <actuator>
+  <actuator>
     <motor name="rs04joint" joint="actjoint"/>
-  </actuator> -->
+  </actuator>
 </mujoco>
