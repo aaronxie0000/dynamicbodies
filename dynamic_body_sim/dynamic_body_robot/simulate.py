@@ -39,7 +39,7 @@ def key_callback(key):
         applying_force = not applying_force
         print(f"Applying force: {applying_force}")
     
-    elif chr(key) == 'T':
+    elif chr(key) == 'V':
         # Toggle frame visualization
         if viewer.opt.frame == 7:
             viewer.opt.frame = 1
@@ -75,11 +75,9 @@ def main():
             sensor_data = {
                 "time": sim_time,
                 "base_pos": data.sensor("base_link_pos").data.tolist(),
-                "base_quat": data.sensor("base_link_quat").data.tolist(),
-                "base_vel": data.sensor("base_link_vel").data.tolist(),
-                "base_ang_vel": data.sensor("base_link_ang_vel").data.tolist(),
-                "imu_acc": data.sensor("imu_acc").data.tolist(),
-                "imu_gyro": data.sensor("imu_gyro").data.tolist(),
+                "force_sensor": data.sensor("force_sensor").data.tolist(),
+                "KB_D_301R_R_Femur_Lower_Drive Torques": data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[:3],
+                "KB_D_301R_R_Femur_Lower_Drive Forces": data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[3:],
             }
             recorded_data.append(sensor_data)
             
