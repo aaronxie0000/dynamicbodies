@@ -67,9 +67,6 @@ def main():
             if applying_force:
                 # Apply force in x direction to the torso
                 data.xfrc_applied[torso_body_id, :3] = [10.0, 0.0, 0.0]
-            else:
-                # Clear forces
-                data.xfrc_applied[torso_body_id] = 0
             
             # Record data
             sensor_data = {
@@ -78,6 +75,9 @@ def main():
                 "force_sensor": data.sensor("force_sensor").data.tolist(),
                 "KB_D_301R_R_Femur_Lower_Drive Torques": data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[:3],
                 "KB_D_301R_R_Femur_Lower_Drive Forces": data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[3:],
+                "KB_D_301R_R_Femur_Lower_Drive Force X": [data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[3]],
+                "KB_D_301R_R_Femur_Lower_Drive Force Y": [data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[4]],
+                "KB_D_301R_R_Femur_Lower_Drive Force Z": [data.body("KB_D_301R_R_Femur_Lower_Drive").cfrc_int.tolist()[5]]
             }
             recorded_data.append(sensor_data)
             
