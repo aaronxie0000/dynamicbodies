@@ -1,3 +1,4 @@
+from pathlib import Path
 import mujoco
 import mujoco.viewer
 import time
@@ -5,13 +6,8 @@ import numpy as np
 import json
 import os
 
-# Get the current file's directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# Path to the kbot.xml file
-xml_path = os.path.join(current_dir, "kbot.xml")
-
-# Load the model and create data
-model = mujoco.MjModel.from_xml_path(xml_path)
+path = Path(__file__).parent
+model = mujoco.MjModel.from_xml_path(str(path / "kbotwscene.xml"))
 data = mujoco.MjData(model)
 
 # Reset the simulation data
@@ -20,9 +16,8 @@ mujoco.mj_resetData(model, data)
 # Set simulation parameters
 model.opt.timestep = 0.001  # 1000Hz simulation
 
-# Flag to track if we're applying external force
+
 applying_force = False
-# Target body for applying force (torso)
 torso_body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "KB_B_102B_TORSO_BOTTOM")
 
 def key_callback(key):
@@ -64,12 +59,6 @@ def main():
         # Create a list to store recorded data
         recorded_data = []
         
-        print("Simulation controls:")
-        print("  Space: Reset position and velocity")
-        print("  R: Reset simulation")
-        print("  Z: Toggle force application")
-        print("  T: Toggle frame visualization")
-        
         while viewer.is_running():
             # Apply simple control - zero control for now
             data.ctrl = np.zeros(model.nu)
@@ -108,7 +97,7 @@ def main():
                 time.sleep(target_time - current_time)
         
         # Save recorded data to a JSON file when simulation ends
-        with open("kbot_data.json", "w") as f:
+        with open("data/kbot_data.json", "w") as f:
             json.dump(recorded_data, f, indent=4)
         
         print(f"Data saved to kbot_data.json with {len(recorded_data)} timesteps")

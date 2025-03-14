@@ -3,11 +3,13 @@ import mujoco.viewer
 import time
 import numpy as np
 import json
-from actuated_pendulum.motion_controller import compute_torque
+from pathlib import Path
+from dynamic_body_sim.utils.motion_controller import compute_torque
 
 
 def run_simulation():
-    model = mujoco.MjModel.from_xml_path("actauted_pendulum/pendulum.xml")
+    path = Path(__file__).parent
+    model = mujoco.MjModel.from_xml_path(str(path / "pendulum.xml"))
     data = mujoco.MjData(model)
 
     mujoco.mj_resetData(model, data)
@@ -72,7 +74,7 @@ def run_simulation():
                 time.sleep(target_time - current_time)
         
         # Save the recorded data to a JSON file when simulation ends
-        with open("force_data.json", "w") as f:
+        with open("data/pendulum_data.json", "w") as f:
             json.dump(recorded_data, f, indent=4)
         
         print(f"Data saved to force_data.json with {len(recorded_data)} timesteps")

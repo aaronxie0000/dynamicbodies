@@ -1,5 +1,25 @@
-/kbot-v2
-/simplerobot/assets
-MUJOCO_LOG.txt
-force_data.json
-__pycache__
+# .gitignore
+*DS_Store*
+
+# Python
+*.py[oc]
+__pycache__/
+*.egg-info
+.eggs/
+.mypy_cache/*
+.pyre/
+.pytest_cache/
+.ruff_cache/
+.dmypy.json
+
+# Development
+scratch/
+
+# Data
+*.json
+
+# Build artifacts
+build/
+dist/
+*.so
+out*/
