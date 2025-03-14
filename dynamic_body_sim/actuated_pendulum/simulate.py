@@ -14,20 +14,21 @@ def run_simulation():
 
     mujoco.mj_resetData(model, data)
 
-    body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "toplink")
+    apply_force_body = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "bottomlink")
     applying_force = False
 
     def key_callback(key):
         if chr(key) == ' ':
-            data.qpos = np.zeros(len(data.qpos))
-            data.qvel = np.zeros(len(data.qvel))
+            data.qpos[0] = 0  # Reset joint angle
+            data.qpos[1] = 2  # Set height of bottomlink to 2 meters
+            data.qvel[:] = 0  # Reset velocities
         elif chr(key) == 'R':
-            data.qpos[0] = 3
+            mujoco.mj_resetData(model, data)
         elif chr(key) == 'Z':
             nonlocal applying_force
             applying_force = not applying_force
             print(f"Applying force: {applying_force}")
-        elif chr(key) == 'T':
+        elif chr(key) == 'V':
             if viewer.opt.frame == 7:
                 viewer.opt.frame = 1
             else:
@@ -49,7 +50,7 @@ def run_simulation():
             data.ctrl = -5
 
             if applying_force:
-                data.xfrc_applied[body_id, :3] = [0.0, 0.0, 50.0]
+                data.xfrc_applied[apply_force_body, :3] = [100.0, 0.0, 0.0]
 
             # Record data before stepping the simulation
             force_data = {

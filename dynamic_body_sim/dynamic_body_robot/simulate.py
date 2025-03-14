@@ -18,27 +18,24 @@ model.opt.timestep = 0.001  # 1000Hz simulation
 
 
 applying_force = False
-torso_body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "KB_B_102B_TORSO_BOTTOM")
+apply_force_body = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "KB_B_102B_TORSO_BOTTOM")
 
 def key_callback(key):
     global applying_force
     
     if chr(key) == ' ':
-        # Reset position and velocity
-        data.qpos = np.zeros(len(data.qpos))
-        data.qvel = np.zeros(len(data.qvel))
-        print("Reset position and velocity")
-    
+        # Set position of floating base to 2 meters height
+        data.qpos[2] = 2.0  # The 3rd element controls vertical position
+        mujoco.mj_forward(model, data)  # Update simulation state
+        print("Set position to a height")
     elif chr(key) == 'R':
         # Reset to initial state
         mujoco.mj_resetData(model, data)
         print("Reset simulation")
-    
     elif chr(key) == 'Z':
         # Toggle force application
         applying_force = not applying_force
         print(f"Applying force: {applying_force}")
-    
     elif chr(key) == 'V':
         # Toggle frame visualization
         if viewer.opt.frame == 7:
@@ -55,6 +52,8 @@ def main():
     with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as viewer:
         target_time = time.time()
         sim_time = 0.0
+
+        viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_COM] = True
         
         # Create a list to store recorded data
         recorded_data = []
@@ -66,7 +65,7 @@ def main():
             # Apply external force if enabled
             if applying_force:
                 # Apply force in x direction to the torso
-                data.xfrc_applied[torso_body_id, :3] = [10.0, 0.0, 0.0]
+                data.xfrc_applied[apply_force_body, :3] = [10.0, 0.0, 0.0]
             
             # Record data
             sensor_data = {
@@ -88,6 +87,7 @@ def main():
             # Update viewer
             viewer.sync()
             
+            breakpoint()
             # Maintain real-time simulation
             target_time += model.opt.timestep
             current_time = time.time()

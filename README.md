@@ -7,14 +7,15 @@ Basic actuated pendulum example in MuJoCo for inital dev (and later testing) & s
 ### Running the Actuated Pendulum Simulation
 
 ```bash
-mjpython -m actauted_pendulum.test_block_force
+pip install -e .
+mjpython -m dynamic_body_sim.actauted_pendulum.test_block_force
 ```
 
 ### Keyboard Controls
 
 While the simulation is running, you can use the following keyboard controls:
 
-- **Space**: Reset the pendulum position and velocity to zero
-- **R**: Raise the pendulum 
+- **Space**: Drop from height
+- **R**: Reset the Simulation
 - **Z**: Toggle applying force to the top link
-- **T**: Toggle frame visualization mode
+- **V**: Toggle frame visualization mode between body and global
