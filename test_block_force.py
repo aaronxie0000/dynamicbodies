@@ -25,6 +25,12 @@ def key_callback(key):
         global applying_force
         applying_force = not applying_force
         print(f"Applying force: {applying_force}")
+    elif chr(key) == 'T':
+        if viewer.opt.frame == 7:
+            viewer.opt.frame = 1
+        else:
+            viewer.opt.frame = 7
+        viewer.sync()
 
 
 
@@ -35,14 +41,13 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
     target_time = time.time()
     # Create a list to store the data
     recorded_data = []
-    contact_force = np.zeros((6,1), dtype=np.float64)
     sim_time = 0.0
 
     # viewer.opt.frame = True
 
     while viewer.is_running():
-        data.ctrl = compute_torque(0.0, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
-        # data.ctrl = 5
+        # data.ctrl = compute_torque(0.0, data.joint("actjoint").qpos, data.joint("actjoint").qvel)
+        data.ctrl = 5
 
 
         if applying_force:
@@ -61,14 +66,14 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
         }
         recorded_data.append(force_data)
 
-        # if sim_time > 5.0:
-        #     print("internal force top link: ", data.body("toplink").cfrc_int)
-        #     print("external force top link: ", data.body("toplink").cfrc_ext)
-        #     print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
-        #     print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
-        #     print("force sensor: ", data.sensor("force_sensor").data.tolist())
-        #     print("body masses: ", model.body_mass)
-        #     breakpoint()
+        if sim_time > 5.0:
+            print("internal force top link: ", data.body("toplink").cfrc_int)
+            print("external force top link: ", data.body("toplink").cfrc_ext)
+            print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
+            print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
+            print("force sensor: ", data.sensor("force_sensor").data.tolist())
+            print("body masses: ", model.body_mass)
+            breakpoint()
 
 
         # Step simulation
