@@ -55,8 +55,8 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
             "internal_force_toplink": data.body("toplink").cfrc_int.tolist(),
             "external_force_toplink": data.body("toplink").cfrc_ext.tolist(),
             "cfrc_ext": data.cfrc_ext.tolist(),
-            # "internal_force_bottomlink": data.body("bottomlink").cfrc_int.tolist(),
-            # "external_force_bottomlink": data.body("bottomlink").cfrc_ext.tolist(),
+            "internal_force_bottomlink": data.body("bottomlink").cfrc_int.tolist(),
+            "external_force_bottomlink": data.body("bottomlink").cfrc_ext.tolist(),
             "force_sensor": data.sensor("force_sensor").data.tolist(),
         }
         recorded_data.append(force_data)
@@ -64,8 +64,8 @@ with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as vie
         if sim_time > 3.0:
             print("internal force top link: ", data.body("toplink").cfrc_int)
             print("external force top link: ", data.body("toplink").cfrc_ext)
-            # print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
-            # print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
+            print("internal force bottom link: ", data.body("bottomlink").cfrc_int)
+            print("external force bottom link: ", data.body("bottomlink").cfrc_ext)
             print("force sensor: ", data.sensor("force_sensor").data.tolist())
             breakpoint()
 
