@@ -4,7 +4,7 @@
 
 import re
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", "r", encoding="utf-8") as f:
     long_description: str = f.read()
@@ -23,7 +23,6 @@ with open("dynamic_body_sim/__init__.py", "r", encoding="utf-8") as fh:
 assert version_re is not None, "Could not find version in dynamic_body_sim/__init__.py"
 version: str = version_re.group(1)
 
-
 setup(
     name="dynamic_body_sim",
     version=version,
@@ -36,10 +35,12 @@ setup(
     install_requires=requirements,
     tests_require=requirements_dev,
     extras_require={"dev": requirements_dev},
-    packages=["dynamic_body_sim"],
-    # entry_points={
-    #     "console_scripts": [
-    #         "dynamic_body_sim.cli:main",
-    #     ],
-    # },
+    packages=find_packages(),
+    entry_points={
+        'console_scripts': [
+            'dybs-plot=dynamic_body_sim.core.plot:main',
+            'dybs-filterplot=dynamic_body_sim.core.filterplot:main',
+            'dybs-examples=dynamic_body_sim.core.examples:main',
+        ],
+    },
 )

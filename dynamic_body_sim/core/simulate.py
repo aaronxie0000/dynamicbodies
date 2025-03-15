@@ -130,7 +130,6 @@ def run_simulation(
             # Apply control if provided
             if control_function:
                 data.ctrl = control_function(data, model)
-                print(data.ctrl)
             
             # Apply external force if enabled
             if applying_force[0] and apply_force_body is not None:

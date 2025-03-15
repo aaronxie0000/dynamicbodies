@@ -1,6 +1,6 @@
 from pathlib import Path
 import numpy as np
-from dynamic_body_sim.src.simulate import run_simulation, mujoco
+from dynamic_body_sim.core.simulate import run_simulation, mujoco
 
 def humanoid_control_function(data, model):
     """

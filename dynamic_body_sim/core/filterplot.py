@@ -183,7 +183,7 @@ def main():
     args = parser.parse_args()
     
     # Determine which JSON file to use based on the argument
-    data_file = 'data/pendulum_data.json' if args.data == 'pend' else 'data/kbot_data.json'
+    data_file = 'dynamic_body_sim/actuated_pendulum/data/pendulum_data.json' if args.data == 'pend' else 'dynamic_body_sim/humanoid_robot/data/kbot_data.json'
     print(f"Using data from {data_file}")
     
     # Load the data
