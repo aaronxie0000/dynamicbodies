@@ -30,27 +30,6 @@ def run_simulation():
     model_path = path / "pendulum.xml"
     output_file = path/ "data/pendulum_data.json"
     
-    # Define custom key actions
-    def reset_joint():
-        # This function will be called when the space key is pressed
-        # We need to get the model and data from the current simulation
-        import inspect
-        frame = inspect.currentframe()
-        while frame:
-            if 'data' in frame.f_locals and 'model' in frame.f_locals:
-                data = frame.f_locals['data']
-                model = frame.f_locals['model']
-                data.qpos[0] = 0  # Reset joint angle
-                data.qpos[1] = 2  # Set height of bottomlink to 2 meters
-                data.qvel[:] = 0  # Reset velocities
-                print("Reset joint position and velocity")
-                break
-            frame = frame.f_back
-    
-    custom_key_actions = {
-        ' ': reset_joint
-    }
-    
     run_mujoco_simulation(
         model_path=model_path,
         output_file=output_file,
@@ -58,7 +37,6 @@ def run_simulation():
         force_magnitude=[100.0, 0.0, 0.0],
         timestep=0.001,
         data_recorder=pendulum_data_recorder,
-        custom_key_actions=custom_key_actions,
         control_function=pendulum_control_function
     )
 

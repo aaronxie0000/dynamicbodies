@@ -34,27 +34,6 @@ def main():
     model_path = path / "kbotwscene.xml"
     output_file = path / "data/kbot_data.json"
     
-    # Define custom key actions
-    def set_height():
-        # This function will be called when the space key is pressed
-        # We need to get the model and data from the current simulation
-        # This is a bit of a hack, but it works for this example
-        import inspect
-        frame = inspect.currentframe()
-        while frame:
-            if 'data' in frame.f_locals and 'model' in frame.f_locals:
-                data = frame.f_locals['data']
-                model = frame.f_locals['model']
-                data.qpos[2] = 2.0  # The 3rd element controls vertical position
-                mujoco.mj_forward(model, data)  # Update simulation state
-                print("Set position to a height")
-                break
-            frame = frame.f_back
-    
-    custom_key_actions = {
-        ' ': set_height
-    }
-    
     run_simulation(
         model_path=model_path,
         output_file=output_file,
@@ -62,7 +41,6 @@ def main():
         force_magnitude=[10.0, 0.0, 0.0],
         timestep=0.001,
         data_recorder=humanoid_data_recorder,
-        custom_key_actions=custom_key_actions,
         control_function=humanoid_control_function,
         viewer_setup=humanoid_viewer_setup
     )

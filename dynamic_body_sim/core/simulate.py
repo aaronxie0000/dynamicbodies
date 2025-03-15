@@ -60,6 +60,10 @@ def create_key_callback(data, model, applying_force_ref, viewer_ref, custom_acti
                 viewer_ref[0].opt.frame = 7
             viewer_ref[0].sync()
             print("Toggled frame visualization")
+        elif char_key == ' ':
+            data.qpos[2] = 2  # Set height of root to 2 meters
+            data.qvel[:] = 0  # Reset velocities
+            print("Drop from height")
         
         # Execute custom actions if provided
         if custom_actions and char_key in custom_actions:
@@ -75,7 +79,6 @@ def run_simulation(
     force_magnitude=[10.0, 0.0, 0.0],
     timestep=0.001,
     data_recorder=None,
-    custom_key_actions=None,
     control_function=None,
     viewer_setup=None
 ):
@@ -110,7 +113,7 @@ def run_simulation(
     viewer_ref = [None]
     
     # Create key callback
-    key_cb = create_key_callback(data, model, applying_force, viewer_ref, custom_key_actions)
+    key_cb = create_key_callback(data, model, applying_force, viewer_ref)
     
     # Launch the viewer
     with mujoco.viewer.launch_passive(model, data, key_callback=key_cb) as viewer:
