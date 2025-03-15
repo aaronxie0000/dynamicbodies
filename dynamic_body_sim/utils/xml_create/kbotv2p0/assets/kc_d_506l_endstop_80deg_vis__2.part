@@ -1,0 +1,14 @@
+{
+    "configuration": "default",
+    "documentId": "2bc166d5eca83dc6bf35b87b",
+    "documentMicroversion": "bfa1d6b776c594f9ea41f075",
+    "documentVersion": "488cac9ca4d5819963cacb3c",
+    "elementId": "f0e391accbfe7dac69971e33",
+    "fullConfiguration": "default",
+    "id": "MGyvdrpD6R1122r07",
+    "isStandardContent": false,
+    "name": "KC-D-506L_EndStop_80deg_vis <2>",
+    "partId": "SR1fB",
+    "suppressed": false,
+    "type": "Part"
+}

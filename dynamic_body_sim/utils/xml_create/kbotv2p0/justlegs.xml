@@ -1,0 +1,467 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/c4234bd597023ccafc0d4697/w/65ea27f58ce9e083d28137a0/e/300729515391a3d6b13dd23f -->
+<mujoco model="kbotv2p0">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <option noslip_iterations="1"/>
+  <default>
+    <default class="kbotv2p0">
+      <joint frictionloss="0.1" armature="0.005"/>
+      <position kp="50" dampratio="1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+      </default>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Link flat_foot_pad_left -->
+    <body name="flat_foot_pad_left" pos="0 0 0" quat="1 0 0 0" childclass="kbotv2p0">
+      <freejoint name="flat_foot_pad_left_freejoint"/>
+      <inertial pos="-0.181743 0.407136 0.122289" mass="0.119047" fullinertia="0.000352366 0.000134834 0.000438626 0.000143432 4.99142e-05 -5.33413e-05"/>
+      <!-- Part flat_foot_pad_left -->
+      <geom type="mesh" class="visual" pos="0.0884542 0.436374 0.865229" quat="0.932946 0.0298459 0.254415 0.252971" mesh="flat_foot_pad_left" material="flat_foot_pad_left_material"/>
+      <geom type="mesh" class="collision" pos="0.0884542 0.436374 0.865229" quat="0.932946 0.0298459 0.254415 0.252971" mesh="flat_foot_pad_left" material="flat_foot_pad_left_material"/>
+      <!-- Link kb_d_501l_l_leg_foot -->
+      <body name="kb_d_501l_l_leg_foot" pos="-0.154477 0.321902 0.118594" quat="0.0298459 -0.932946 -0.252971 0.254415">
+        <!-- Joint from flat_foot_pad_left to kb_d_501l_l_leg_foot -->
+        <!-- Joint is "fixed", skipping it -->
+        <inertial pos="0.0173453 -0.102124 -0.0156813" mass="0.364886" fullinertia="0.00099129 0.000182303 0.00106688 -2.43764e-05 -1.31748e-05 -5.42788e-05"/>
+        <!-- Part kb_d_501l_l_leg_foot -->
+        <geom type="mesh" class="visual" pos="-0.107 -0.126324 -0.776" quat="3.05311e-16 1 5.82867e-16 5.75928e-16" mesh="kb_d_501l_l_leg_foot" material="kb_d_501l_l_leg_foot_material"/>
+        <geom type="mesh" class="collision" pos="-0.107 -0.126324 -0.776" quat="3.05311e-16 1 5.82867e-16 5.75928e-16" mesh="kb_d_501l_l_leg_foot" material="kb_d_501l_l_leg_foot_material"/>
+        <!-- Link kb_d_504x_bolt_ankle_l_vis -->
+        <body name="kb_d_504x_bolt_ankle_l_vis" pos="0.034 -0.113324 -0.038" quat="0.5 0.5 -0.5 -0.5">
+          <!-- Joint from kb_d_501l_l_leg_foot to kb_d_504x_bolt_ankle_l_vis -->
+          <joint name="left_ankle_02" type="hinge" range="-0.7853981633974421 0.29670597283904226" frictionloss="0.1" armature="0.002"/>
+          <inertial pos="0.00141003 -0.166186 -0.0110327" mass="0.591648" fullinertia="0.00644781 0.000835732 0.00689898 -7.88105e-05 6.30232e-05 -0.000549623"/>
+          <!-- Part kb_d_504x_bolt_ankle_l_vis -->
+          <geom type="mesh" class="visual" pos="0.013 -0.738 0.1426" quat="0.5 0.5 0.5 -0.5" mesh="kb_d_504x_bolt_ankle_l_vis" material="kb_d_504x_bolt_ankle_l_vis_material"/>
+          <!-- Part kc_d_402l_l_shin_idle -->
+          <geom type="mesh" class="visual" pos="0.013 -0.738 0.1421" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_402l_l_shin_idle" material="kc_d_402l_l_shin_idle_material"/>
+          <geom type="mesh" class="collision" pos="0.013 -0.738 0.1421" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_402l_l_shin_idle" material="kc_d_402l_l_shin_idle_material"/>
+          <!-- Link kb_d_502l_ankle_shaft_vis -->
+          <body name="kb_d_502l_ankle_shaft_vis" pos="0.01 -0.185 -0.0029" quat="3.29597e-17 -1 -6.93889e-18 -4.16334e-17">
+            <!-- Joint from kb_d_504x_bolt_ankle_l_vis to kb_d_502l_ankle_shaft_vis -->
+            <!-- Joint is "fixed", skipping it -->
+            <inertial pos="0.0019912 -0.00669625 -0.0179641" mass="0.524319" fullinertia="0.000732694 0.000305328 0.000806445 7.52249e-05 2.85826e-05 -8.06552e-05"/>
+            <!-- Part kc_d_506l_endstop_80deg_vis -->
+            <geom type="mesh" class="visual" pos="0.003 0.553 -0.1445" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_506l_endstop_80deg_vis" material="kc_d_506l_endstop_80deg_vis_material"/>
+            <!-- Part kb_d_502l_ankle_shaft_vis -->
+            <geom type="mesh" class="visual" pos="0.003 0.553 -0.1449" quat="0.5 -0.5 -0.5 -0.5" mesh="kb_d_502l_ankle_shaft_vis" material="kb_d_502l_ankle_shaft_vis_material"/>
+            <!-- Part rs02 -->
+            <geom type="mesh" class="visual" pos="0 -2.22045e-16 -0.014" quat="0.707107 2.6986e-17 -1.27071e-16 0.707107" mesh="rs02" material="rs02_material"/>
+            <geom type="mesh" class="collision" pos="0 -2.22045e-16 -0.014" quat="0.707107 2.6986e-17 -1.27071e-16 0.707107" mesh="rs02" material="rs02_material"/>
+            <!-- Part kb_d_503x_ankle_link_s_left_vis -->
+            <geom type="mesh" class="visual" pos="0.003 0.553 -0.1469" quat="0.5 -0.5 -0.5 -0.5" mesh="kb_d_503x_ankle_link_s_left_vis" material="kb_d_503x_ankle_link_s_left_vis_material"/>
+          </body>
+          <!-- Link kc_d_401l_l_shin_drive -->
+          <body name="kc_d_401l_l_shin_drive" pos="0.0544096 -0.19227 0.02535" quat="8.08381e-16 -1 5.20417e-17 -7.77156e-16">
+            <!-- Joint from kb_d_504x_bolt_ankle_l_vis to kc_d_401l_l_shin_drive -->
+            <!-- Joint is "fixed", skipping it -->
+            <inertial pos="-0.0508334 0.0216827 -0.0261505" mass="0.554568" fullinertia="0.00566897 0.000623615 0.00615587 -0.000265977 3.48187e-05 0.000249654"/>
+            <!-- Part kc_d_401l_l_shin_drive -->
+            <geom type="mesh" class="visual" pos="-0.0414096 0.54573 -0.11675" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_401l_l_shin_drive" material="kc_d_401l_l_shin_drive_material"/>
+            <geom type="mesh" class="collision" pos="-0.0414096 0.54573 -0.11675" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_401l_l_shin_drive" material="kc_d_401l_l_shin_drive_material"/>
+            <!-- Link rs04urdf -->
+            <body name="rs04urdf" pos="-0.0244096 0.0977304 -0.01075" quat="0 1 0 0">
+              <!-- Joint from kc_d_401l_l_shin_drive to rs04urdf -->
+              <joint name="left_knee_04" type="hinge" range="0.0 2.705260340591211" frictionloss="0.1" armature="0.007"/>
+              <inertial pos="-1.3877e-17 5.55988e-17 -0.0239149" mass="1.42" fullinertia="0.00148229 0.00148229 0.0023883 -4.63257e-17 -5.91574e-17 -7.68494e-18"/>
+              <!-- Part rs04urdf -->
+              <geom type="mesh" class="visual" pos="-1.38778e-17 5.55112e-17 -0.0195" quat="0.707107 5.77671e-15 7.81416e-15 0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+              <geom type="mesh" class="collision" pos="-1.38778e-17 5.55112e-17 -0.0195" quat="0.707107 5.77671e-15 7.81416e-15 0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+              <!-- Link kc_d_302l_l_femur_lower_idle -->
+              <body name="kc_d_302l_l_femur_lower_idle" pos="-5.55112e-17 1.11022e-16 -0.039" quat="1 1.20181e-16 1.95268e-14 1.26837e-14">
+                <!-- Joint from rs04urdf to kc_d_302l_l_femur_lower_idle -->
+                <!-- Joint is "fixed", skipping it -->
+                <inertial pos="-0.0122734 -0.0615746 -0.0148528" mass="0.301163" fullinertia="0.00185461 0.000468492 0.00225497 -0.000184332 -1.73148e-05 -0.000134807"/>
+                <!-- Part kc_d_302l_l_femur_lower_idle -->
+                <geom type="mesh" class="visual" pos="-0.017 -0.448 0.1455" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_302l_l_femur_lower_idle" material="kc_d_302l_l_femur_lower_idle_material"/>
+                <geom type="mesh" class="collision" pos="-0.017 -0.448 0.1455" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_302l_l_femur_lower_idle" material="kc_d_302l_l_femur_lower_idle_material"/>
+                <!-- Part kc_d_403l_leg_shin_cover_vis -->
+                <geom type="mesh" class="visual" pos="-0.017 -0.448 0.1455" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_403l_leg_shin_cover_vis" material="kc_d_403l_leg_shin_cover_vis_material"/>
+              </body>
+              <!-- Link kc_d_301l_l_femur_lower_drive -->
+              <body name="kc_d_301l_l_femur_lower_drive" pos="1.38778e-17 1.66533e-16 -8.74301e-15" quat="1.13937e-14 -1 -1.22818e-14 9.36751e-15">
+                <!-- Joint from rs04urdf to kc_d_301l_l_femur_lower_drive -->
+                <!-- Joint is "fixed", skipping it -->
+                <inertial pos="-0.0227278 0.122853 -0.00337772" mass="0.622466" fullinertia="0.00344373 0.00112758 0.00408535 9.5139e-05 1.70722e-05 1.7542e-05"/>
+                <!-- Part kc_d_301l_l_femur_lower_drive -->
+                <geom type="mesh" class="visual" pos="-0.017 0.448 -0.1065" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_301l_l_femur_lower_drive" material="kc_d_301l_l_femur_lower_drive_material"/>
+                <geom type="mesh" class="collision" pos="-0.017 0.448 -0.1065" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_301l_l_femur_lower_drive" material="kc_d_301l_l_femur_lower_drive_material"/>
+                <!-- Link kc_d_203l_thigh_roll_hardstop_vis -->
+                <body name="kc_d_203l_thigh_roll_hardstop_vis" pos="-0.021 0.212 0.0195" quat="0.5 0.5 -0.5 0.5">
+                  <!-- Joint from kc_d_301l_l_femur_lower_drive to kc_d_203l_thigh_roll_hardstop_vis -->
+                  <joint name="left_hip_yaw_03" type="hinge" range="-1.5707963267948486 1.5707963267949445" frictionloss="0.3" armature="0.005"/>
+                  <inertial pos="0.00039658 -3.45561e-07 -0.0270179" mass="0.887429" fullinertia="0.000664542 0.000679358 0.00090556 1.45583e-08 -1.04302e-05 9.20531e-09"/>
+                  <!-- Part rs03 -->
+                  <geom type="mesh" class="visual" pos="2.77556e-17 2.77556e-17 -0.02225" quat="0 1 0 0" mesh="rs03" material="rs03_material"/>
+                  <geom type="mesh" class="collision" pos="2.77556e-17 2.77556e-17 -0.02225" quat="0 1 0 0" mesh="rs03" material="rs03_material"/>
+                  <!-- Part kc_d_203l_thigh_roll_hardstop_vis -->
+                  <geom type="mesh" class="visual" pos="-0.126 -0.004 -0.236" quat="7.56339e-15 -1 5.41234e-15 1.52482e-15" mesh="kc_d_203l_thigh_roll_hardstop_vis" material="kc_d_203l_thigh_roll_hardstop_vis_material"/>
+                  <!-- Link kc_d_201l_upperthigh_act -->
+                  <body name="kc_d_201l_upperthigh_act" pos="1.11022e-16 0 -0.0025" quat="0 1 0 0">
+                    <!-- Joint from kc_d_203l_thigh_roll_hardstop_vis to kc_d_201l_upperthigh_act -->
+                    <!-- Joint is "fixed", skipping it -->
+                    <inertial pos="-0.000171592 -0.0179988 0.0697493" mass="0.40477" fullinertia="0.00184425 0.00223756 0.000958057 7.80946e-06 -2.78582e-05 -2.09996e-05"/>
+                    <!-- Part kc_d_201l_upperthigh_act -->
+                    <geom type="mesh" class="visual" pos="-0.126 0.004 0.2335" quat="1 -0 4.2677e-16 1.97875e-16" mesh="kc_d_201l_upperthigh_act" material="kc_d_201l_upperthigh_act_material"/>
+                    <geom type="mesh" class="collision" pos="-0.126 0.004 0.2335" quat="1 -0 4.2677e-16 1.97875e-16" mesh="kc_d_201l_upperthigh_act" material="kc_d_201l_upperthigh_act_material"/>
+                    <!-- Link kc_d_106x_hip_bearing_pin_l_vis -->
+                    <body name="kc_d_106x_hip_bearing_pin_l_vis" pos="0.0495 0.01675 0.074716" quat="0.707107 0.707107 0 -3.18925e-17">
+                      <!-- Joint from kc_d_201l_upperthigh_act to kc_d_106x_hip_bearing_pin_l_vis -->
+                      <!-- Joint is "fixed", skipping it -->
+                      <inertial pos="-0.0479653 0.0278969 -0.0219566" mass="0.201041" fullinertia="0.000628961 0.000298581 0.000874357 -3.17951e-06 -1.06713e-06 -4.22106e-05"/>
+                      <!-- Part kc_d_201l_upperthigh_idle -->
+                      <geom type="mesh" class="visual" pos="-0.1755 0.158784 0.01275" quat="0.707107 -0.707107 1.74424e-15 6.08043e-15" mesh="kc_d_201l_upperthigh_idle" material="kc_d_201l_upperthigh_idle_material"/>
+                      <geom type="mesh" class="collision" pos="-0.1755 0.158784 0.01275" quat="0.707107 -0.707107 1.74424e-15 6.08043e-15" mesh="kc_d_201l_upperthigh_idle" material="kc_d_201l_upperthigh_idle_material"/>
+                      <!-- Part kc_d_106x_hip_bearing_pin_l_vis -->
+                      <geom type="mesh" class="visual" pos="-0.1755 0.158784 0.01275" quat="0.707107 -0.707107 -0 4.45878e-17" mesh="kc_d_106x_hip_bearing_pin_l_vis" material="kc_d_106x_hip_bearing_pin_l_vis_material"/>
+                      <!-- Link rs03 -->
+                      <body name="rs03" pos="-0.0495 0.064784 -0.0156" quat="1.24831e-14 1 1.22298e-15 -5.02376e-15">
+                        <!-- Joint from kc_d_106x_hip_bearing_pin_l_vis to rs03 -->
+                        <!-- Joint is "fixed", skipping it -->
+                        <inertial pos="-2.88658e-17 3.3615e-18 -0.0293321" mass="0.88" fullinertia="0.000656071 0.000656071 0.000887087 2.73144e-20 -9.84865e-20 3.96253e-20"/>
+                        <!-- Part rs03_2 -->
+                        <geom type="mesh" class="visual" pos="-2.77556e-17 0 -0.03435" quat="1 6.93889e-18 -9.60578e-17 -1.82357e-16" mesh="rs03" material="rs03_material"/>
+                        <geom type="mesh" class="collision" pos="-2.77556e-17 0 -0.03435" quat="1 6.93889e-18 -9.60578e-17 -1.82357e-16" mesh="rs03" material="rs03_material"/>
+                        <!-- Link kc_d_102l_l_hip_yoke_drive -->
+                        <body name="kc_d_102l_l_hip_yoke_drive" pos="8.6875e-15 -7.77156e-16 -0.0566" quat="1 3.26959e-14 4.5226e-15 -1.85595e-14">
+                          <!-- Joint from rs03 to kc_d_102l_l_hip_yoke_drive -->
+                          <joint name="left_hiproll_03" type="hinge" range="0.0 2.2689280275926285" frictionloss="0.3" armature="0.005"/>
+                          <inertial pos="-0.03304 -0.0251867 0.00443666" mass="0.370103" fullinertia="0.000577464 0.000511653 0.000618347 -0.000107509 0.000129333 9.83583e-05"/>
+                          <!-- Part kc_d_102l_l_hip_yoke_drive -->
+                          <geom type="mesh" class="visual" pos="-0.126 -0.094 0.02925" quat="0.707107 0.707107 -0 -9.81308e-18" mesh="kc_d_102l_l_hip_yoke_drive" material="kc_d_102l_l_hip_yoke_drive_material"/>
+                          <geom type="mesh" class="collision" pos="-0.126 -0.094 0.02925" quat="0.707107 0.707107 -0 -9.81308e-18" mesh="kc_d_102l_l_hip_yoke_drive" material="kc_d_102l_l_hip_yoke_drive_material"/>
+                          <!-- Link kc_d_103l_l_hip_yoke_idle -->
+                          <body name="kc_d_103l_l_hip_yoke_idle" pos="-0.051 -0.0753552 0.05475" quat="2.01228e-14 1 1.71183e-14 -9.74221e-15">
+                            <!-- Joint from kc_d_102l_l_hip_yoke_drive to kc_d_103l_l_hip_yoke_idle -->
+                            <!-- Joint is "fixed", skipping it -->
+                            <inertial pos="0.0211701 -0.048558 -0.0193982" mass="0.149482" fullinertia="0.000154347 0.00011857 0.000247149 4.72285e-05 4.24645e-06 -8.50522e-06"/>
+                            <!-- Part kc_d_103l_l_hip_yoke_idle -->
+                            <geom type="mesh" class="visual" pos="-0.075 0.0186448 0.0255" quat="0.707107 -0.707107 0 -2.20794e-17" mesh="kc_d_103l_l_hip_yoke_idle" material="kc_d_103l_l_hip_yoke_idle_material"/>
+                            <geom type="mesh" class="collision" pos="-0.075 0.0186448 0.0255" quat="0.707107 -0.707107 0 -2.20794e-17" mesh="kc_d_103l_l_hip_yoke_idle" material="kc_d_103l_l_hip_yoke_idle_material"/>
+                          </body>
+                          <!-- Link kc_d_104_l_hip_yoke_hardstop_vis -->
+                          <body name="kc_d_104_l_hip_yoke_hardstop_vis" pos="-0.071 -0.03 0.02925" quat="2.20794e-17 0.707107 0 0.707107">
+                            <!-- Joint from kc_d_102l_l_hip_yoke_drive to kc_d_104_l_hip_yoke_hardstop_vis -->
+                            <joint name="left_hippitch_04" type="hinge" range="-1.9198621771937163 1.5707963267949427" frictionloss="0.1" armature="0.007"/>
+                            <inertial pos="0.000318854 -0.000402648 -0.022676" mass="1.48591" fullinertia="0.00159288 0.00162176 0.00253937 -3.67165e-06 -1.24698e-05 1.59511e-05"/>
+                            <!-- Part kc_d_105l_hipyokehardstoptooth_vis -->
+                            <geom type="mesh" class="visual" pos="2.65066e-15 0.064 -0.055" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_105l_hipyokehardstoptooth_vis" material="kc_d_105l_hipyokehardstoptooth_vis_material"/>
+                            <!-- Part rs04urdf_2 -->
+                            <geom type="mesh" class="visual" pos="2.08167e-16 3.44169e-15 -0.0195" quat="0.707107 6.14912e-15 -1.71227e-14 0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+                            <geom type="mesh" class="collision" pos="2.08167e-16 3.44169e-15 -0.0195" quat="0.707107 6.14912e-15 -1.71227e-14 0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+                            <!-- Part kc_d_104_l_hip_yoke_hardstop_vis -->
+                            <geom type="mesh" class="visual" pos="2.98372e-15 0.064 -0.0545" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_104_l_hip_yoke_hardstop_vis" material="kc_d_104_l_hip_yoke_hardstop_vis_material"/>
+                            <!-- Link kc_d_101l_l_hip_static -->
+                            <body name="kc_d_101l_l_hip_static" pos="0 -2.22045e-16 -0.039" quat="1 1.68823e-14 -9.03806e-15 -5.26245e-15">
+                              <!-- Joint from kc_d_104_l_hip_yoke_hardstop_vis to kc_d_101l_l_hip_static -->
+                              <!-- Joint is "fixed", skipping it -->
+                              <inertial pos="-0.00058945 0.028258 0.011495" mass="0.466806" fullinertia="0.000814333 0.00116235 0.00165384 -2.21952e-05 -3.41624e-06 -0.000155674"/>
+                              <!-- Part kc_d_101l_l_hip_static -->
+                              <geom type="mesh" class="visual" pos="0 0.064 -0.015" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_101l_l_hip_static" material="kc_d_101l_l_hip_static_material"/>
+                              <geom type="mesh" class="collision" pos="0 0.064 -0.015" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_101l_l_hip_static" material="kc_d_101l_l_hip_static_material"/>
+                              <!-- Link kc_d_107l_l_cover -->
+                              <body name="kc_d_107l_l_cover" pos="-0.061 -0.0261716 0.0065" quat="1.96262e-17 0.707107 0 0.707107">
+                                <!-- Joint from kc_d_101l_l_hip_static to kc_d_107l_l_cover -->
+                                <!-- Joint is "fixed", skipping it -->
+                                <inertial pos="0.0179214 0.02009 0.0611129" mass="0.0189213" fullinertia="4.41115e-05 4.22942e-05 8.92244e-06 2.61432e-08 2.97339e-08 -3.41651e-08"/>
+                                <!-- Part kc_d_107l_l_cover -->
+                                <geom type="mesh" class="visual" pos="-0.0215 -0.0901716 0.061" quat="0.707107 0.707107 -0 5.21089e-18" mesh="kc_d_107l_l_cover" material="kc_d_107l_l_cover_material"/>
+                                <geom type="mesh" class="collision" pos="-0.0215 -0.0901716 0.061" quat="0.707107 0.707107 -0 5.21089e-18" mesh="kc_d_107l_l_cover" material="kc_d_107l_l_cover_material"/>
+                              </body>
+                              <!-- Link kc_d_101r_r_hip_static -->
+                              <body name="kc_d_101r_r_hip_static" pos="-0.018 0.063 -0.015" quat="1 -0 -1.66533e-16 -0">
+                                <!-- Joint from kc_d_101l_l_hip_static to kc_d_101r_r_hip_static -->
+                                <!-- Joint is "fixed", skipping it -->
+                                <inertial pos="0.01733 -0.035219 -0.0263885" mass="0.46999" fullinertia="0.000830926 0.0011702 0.00167674 -2.52368e-05 4.04516e-06 0.000159013"/>
+                                <!-- Part kc_d_101r_r_hip_static -->
+                                <geom type="mesh" class="visual" pos="0.018 0.001 -5.55112e-17" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_101r_r_hip_static" material="kc_d_101r_r_hip_static_material"/>
+                                <geom type="mesh" class="collision" pos="0.018 0.001 -5.55112e-17" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_101r_r_hip_static" material="kc_d_101r_r_hip_static_material"/>
+                                <!-- Link kc_d_104r_hip_yoke_hardstop_vis -->
+                                <body name="kc_d_104r_hip_yoke_hardstop_vis" pos="0.018 -0.063 -0.0155" quat="1 -0 -1.66533e-16 -0">
+                                  <!-- Joint from kc_d_101r_r_hip_static to kc_d_104r_hip_yoke_hardstop_vis -->
+                                  <!-- Joint is "fixed", skipping it -->
+                                  <inertial pos="0.000318854 -0.000402648 -0.016324" mass="1.48591" fullinertia="0.00159288 0.00162176 0.00253937 -3.67165e-06 1.24698e-05 -1.59511e-05"/>
+                                  <!-- Part kc_d_105r_hipyokehardstoptooth_vis -->
+                                  <geom type="mesh" class="visual" pos="-2.35922e-16 0.064 0.016" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_105r_hipyokehardstoptooth_vis" material="kc_d_105r_hipyokehardstoptooth_vis_material"/>
+                                  <!-- Part rs04urdf_3 -->
+                                  <geom type="mesh" class="visual" pos="0 0 -0.0195" quat="3.08843e-17 0.707107 -0.707107 1.01021e-17" mesh="rs04urdf" material="rs04urdf_material"/>
+                                  <geom type="mesh" class="collision" pos="0 0 -0.0195" quat="3.08843e-17 0.707107 -0.707107 1.01021e-17" mesh="rs04urdf" material="rs04urdf_material"/>
+                                  <!-- Part kc_d_104r_hip_yoke_hardstop_vis -->
+                                  <geom type="mesh" class="visual" pos="1.80411e-16 0.064 0.0155" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_104r_hip_yoke_hardstop_vis" material="kc_d_104r_hip_yoke_hardstop_vis_material"/>
+                                  <!-- Link kc_d_102r_r_hip_yoke_drive -->
+                                  <body name="kc_d_102r_r_hip_yoke_drive" pos="1.38778e-16 2.22045e-16 -0.039" quat="1 -2.84495e-15 5.55418e-15 -9.30156e-16">
+                                    <!-- Joint from kc_d_104r_hip_yoke_hardstop_vis to kc_d_102r_r_hip_yoke_drive -->
+                                    <joint name="right_hippitch_04" type="hinge" range="-1.5707963267948735 1.9198621771937856" frictionloss="0.1" armature="0.007"/>
+                                    <inertial pos="-0.024813 -0.00481377 -0.0379599" mass="0.370107" fullinertia="0.000618356 0.000511658 0.000577476 -9.83541e-05 -0.000129335 -0.000107507"/>
+                                    <!-- Part kc_d_102r_r_hip_yoke_drive -->
+                                    <geom type="mesh" class="visual" pos="-2.77556e-17 0.064 0.055" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_102r_r_hip_yoke_drive" material="kc_d_102r_r_hip_yoke_drive_material"/>
+                                    <geom type="mesh" class="collision" pos="-2.77556e-17 0.064 0.055" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_102r_r_hip_yoke_drive" material="kc_d_102r_r_hip_yoke_drive_material"/>
+                                    <!-- Link rs03_2 -->
+                                    <body name="rs03_2" pos="-0.02925 -0.03 -0.071" quat="0.707107 -7.94487e-18 -0.707107 4.13928e-17">
+                                      <!-- Joint from kc_d_102r_r_hip_yoke_drive to rs03_2 -->
+                                      <joint name="right_hiproll_03" type="hinge" range="-2.2689280275926054 2.3092638912203256e-14" frictionloss="0.3" armature="0.005"/>
+                                      <inertial pos="-2.55602e-15 8.83912e-16 -0.0272679" mass="0.88" fullinertia="0.000656071 0.000656071 0.000887087 7.63439e-18 -1.47693e-17 -3.8975e-18"/>
+                                      <!-- Part rs03_3 -->
+                                      <geom type="mesh" class="visual" pos="-2.55351e-15 8.88178e-16 -0.02225" quat="1.59942e-15 1 -5.04631e-15 -5.85643e-15" mesh="rs03" material="rs03_material"/>
+                                      <geom type="mesh" class="collision" pos="-2.55351e-15 8.88178e-16 -0.02225" quat="1.59942e-15 1 -5.04631e-15 -5.85643e-15" mesh="rs03" material="rs03_material"/>
+                                      <!-- Link kc_d_106x_hip_bearing_pin_r_vis -->
+                                      <body name="kc_d_106x_hip_bearing_pin_r_vis" pos="-2.55351e-15 8.88178e-16 -0.0566" quat="1 -1.59251e-15 5.60881e-15 -5.26986e-15">
+                                        <!-- Joint from rs03_2 to kc_d_106x_hip_bearing_pin_r_vis -->
+                                        <!-- Joint is "fixed", skipping it -->
+                                        <inertial pos="-0.00152832 -0.0368932 -0.00635678" mass="0.201052" fullinertia="0.000629078 0.000298605 0.000874478 3.26147e-06 1.06826e-06 -4.22179e-05"/>
+                                        <!-- Part kc_d_106x_hip_bearing_pin_r_vis -->
+                                        <geom type="mesh" class="visual" pos="0.126 0.094 0.02835" quat="0.707107 -0.707107 -1.57009e-16 -4.41589e-17" mesh="kc_d_106x_hip_bearing_pin_r_vis" material="kc_d_106x_hip_bearing_pin_r_vis_material"/>
+                                        <!-- Part kc_d_201r_upperthigh_idle -->
+                                        <geom type="mesh" class="visual" pos="0.126 0.094 0.02835" quat="0.707107 -0.707107 3.8044e-15 5.7835e-15" mesh="kc_d_201r_upperthigh_idle" material="kc_d_201r_upperthigh_idle_material"/>
+                                        <geom type="mesh" class="collision" pos="0.126 0.094 0.02835" quat="0.707107 -0.707107 3.8044e-15 5.7835e-15" mesh="kc_d_201r_upperthigh_idle" material="kc_d_201r_upperthigh_idle_material"/>
+                                        <!-- Link kc_d_201r_upperthigh_act -->
+                                        <body name="kc_d_201r_upperthigh_act" pos="-0.0495 -0.064784 0.0156" quat="6.59195e-17 -1 -1.34441e-15 6.85563e-15">
+                                          <!-- Joint from kc_d_106x_hip_bearing_pin_r_vis to kc_d_201r_upperthigh_act -->
+                                          <!-- Joint is "fixed", skipping it -->
+                                          <inertial pos="0.0496673 0.00496894 -0.0347453" mass="0.404703" fullinertia="0.00184422 0.00095798 0.00223755 -2.78675e-05 -7.80953e-06 2.10017e-05"/>
+                                          <!-- Part kc_d_201r_upperthigh_act -->
+                                          <geom type="mesh" class="visual" pos="0.1755 -0.158784 -0.01275" quat="0.707107 0.707107 9.15117e-16 3.92899e-16" mesh="kc_d_201r_upperthigh_act" material="kc_d_201r_upperthigh_act_material"/>
+                                          <geom type="mesh" class="collision" pos="0.1755 -0.158784 -0.01275" quat="0.707107 0.707107 9.15117e-16 3.92899e-16" mesh="kc_d_201r_upperthigh_act" material="kc_d_201r_upperthigh_act_material"/>
+                                          <!-- Link kc_d_203r_thigh_roll_hardstop_vis -->
+                                          <body name="kc_d_203r_thigh_roll_hardstop_vis" pos="0.0495 0.074716 -0.01675" quat="0.707107 -0.707107 -3.71164e-16 9.69041e-16">
+                                            <!-- Joint from kc_d_201r_upperthigh_act to kc_d_203r_thigh_roll_hardstop_vis -->
+                                            <!-- Joint is "fixed", skipping it -->
+                                            <inertial pos="-0.00039658 -3.45561e-07 -0.0245179" mass="0.887429" fullinertia="0.000664542 0.000679358 0.00090556 -1.45583e-08 1.04302e-05 9.20531e-09"/>
+                                            <!-- Part rs03_4 -->
+                                            <geom type="mesh" class="visual" pos="5.55112e-17 -5.55112e-17 -0.01975" quat="1.28023e-15 1 6.50868e-15 3.48679e-16" mesh="rs03" material="rs03_material"/>
+                                            <geom type="mesh" class="collision" pos="5.55112e-17 -5.55112e-17 -0.01975" quat="1.28023e-15 1 6.50868e-15 3.48679e-16" mesh="rs03" material="rs03_material"/>
+                                            <!-- Part kc_d_203r_thigh_roll_hardstop_vis -->
+                                            <geom type="mesh" class="visual" pos="0.126 -0.004 -0.2335" quat="2.5431e-15 1 4.78784e-15 -1.81626e-15" mesh="kc_d_203r_thigh_roll_hardstop_vis" material="kc_d_203r_thigh_roll_hardstop_vis_material"/>
+                                            <!-- Link kc_d_301r_r_femur_lower_drive -->
+                                            <body name="kc_d_301r_r_femur_lower_drive" pos="5.55112e-17 -8.32667e-17 0.0025" quat="1.28023e-15 1 6.50868e-15 3.48679e-16">
+                                              <!-- Joint from kc_d_203r_thigh_roll_hardstop_vis to kc_d_301r_r_femur_lower_drive -->
+                                              <joint name="right_hip_yaw_03" type="hinge" range="-1.5707963267949019 1.5707963267948912" frictionloss="0.3" armature="0.005"/>
+                                              <inertial pos="0.00390224 0.0140747 -0.174558" mass="2.04244" fullinertia="0.0132293 0.0117805 0.00315566 0.000251263 -0.00146865 0.00130334"/>
+                                              <!-- Part kc_d_301r_r_femur_lower_drive -->
+                                              <geom type="mesh" class="visual" pos="0.126 0.004 0.236" quat="1 0 4.77032e-17 3.01932e-15" mesh="kc_d_301r_r_femur_lower_drive" material="kc_d_301r_r_femur_lower_drive_material"/>
+                                              <geom type="mesh" class="collision" pos="0.126 0.004 0.236" quat="1 0 4.77032e-17 3.01932e-15" mesh="kc_d_301r_r_femur_lower_drive" material="kc_d_301r_r_femur_lower_drive_material"/>
+                                              <!-- Part rs04urdf_4 -->
+                                              <geom type="mesh" class="visual" pos="-5.55112e-17 0.021 -0.212" quat="2.09447e-15 -0.707107 -2.19813e-15 -0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+                                              <geom type="mesh" class="collision" pos="-5.55112e-17 0.021 -0.212" quat="2.09447e-15 -0.707107 -2.19813e-15 -0.707107" mesh="rs04urdf" material="rs04urdf_material"/>
+                                              <!-- Link kc_d_401r_r_shin_drive -->
+                                              <body name="kc_d_401r_r_shin_drive" pos="0.0195 0.021 -0.212" quat="0.5 -0.5 -0.5 0.5">
+                                                <!-- Joint from kc_d_301r_r_femur_lower_drive to kc_d_401r_r_shin_drive -->
+                                                <joint name="right_knee_04" type="hinge" range="-2.70526034059117 4.085620730620576e-14" frictionloss="0.1" armature="0.007"/>
+                                                <inertial pos="-0.0264214 0.0760465 -0.0154006" mass="0.554608" fullinertia="0.00566905 0.00062369 0.00615602 0.00026602 3.48237e-05 -0.000249652"/>
+                                                <!-- Part kc_d_401r_r_shin_drive -->
+                                                <geom type="mesh" class="visual" pos="-0.017 -0.448 -0.106" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_401r_r_shin_drive" material="kc_d_401r_r_shin_drive_material"/>
+                                                <geom type="mesh" class="collision" pos="-0.017 -0.448 -0.106" quat="0.5 0.5 0.5 -0.5" mesh="kc_d_401r_r_shin_drive" material="kc_d_401r_r_shin_drive_material"/>
+                                                <!-- Link kc_d_402r_r_shin_idle -->
+                                                <body name="kc_d_402r_r_shin_idle" pos="0.0244096 0.0977304 0.01075" quat="8.30759e-15 -1 1.351e-14 -1.01724e-14">
+                                                  <!-- Joint from kc_d_401r_r_shin_drive to kc_d_402r_r_shin_idle -->
+                                                  <!-- Joint is "fixed", skipping it -->
+                                                  <inertial pos="-0.0530005 -0.0260804 -0.0363832" mass="0.591665" fullinertia="0.00644806 0.00083574 0.00689922 7.8844e-05 6.30186e-05 0.000549655"/>
+                                                  <!-- Part kb_d_504x_bolt_ankle_r_vis -->
+                                                  <geom type="mesh" class="visual" pos="-0.0414096 0.54573 0.11725" quat="0.5 -0.5 -0.5 -0.5" mesh="kb_d_504x_bolt_ankle_r_vis" material="kb_d_504x_bolt_ankle_r_vis_material"/>
+                                                  <!-- Part kc_d_402r_r_shin_idle -->
+                                                  <geom type="mesh" class="visual" pos="-0.0414096 0.54573 0.11675" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_402r_r_shin_idle" material="kc_d_402r_r_shin_idle_material"/>
+                                                  <geom type="mesh" class="collision" pos="-0.0414096 0.54573 0.11675" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_402r_r_shin_idle" material="kc_d_402r_r_shin_idle_material"/>
+                                                  <!-- Link kb_d_501r_r_leg_foot -->
+                                                  <body name="kb_d_501r_r_leg_foot" pos="-0.0544096 -0.19227 -0.02535" quat="8.30239e-15 1 -1.9134e-14 1.02279e-14">
+                                                    <!-- Joint from kc_d_402r_r_shin_idle to kb_d_501r_r_leg_foot -->
+                                                    <joint name="right_ankle_02" type="hinge" range="-0.2967059728389934 0.7853981633974909" frictionloss="0.1" armature="0.002"/>
+                                                    <inertial pos="-0.0112001 0.0223187 -0.0166546" mass="0.364886" fullinertia="0.000182303 0.00106688 0.00099129 5.4279e-05 2.43764e-05 -1.31749e-05"/>
+                                                    <!-- Part kb_d_501r_r_leg_foot -->
+                                                    <geom type="mesh" class="visual" pos="0.013 -0.738 -0.141" quat="0.5 0.5 0.5 -0.5" mesh="kb_d_501r_r_leg_foot" material="kb_d_501r_r_leg_foot_material"/>
+                                                    <geom type="mesh" class="collision" pos="0.013 -0.738 -0.141" quat="0.5 0.5 0.5 -0.5" mesh="kb_d_501r_r_leg_foot" material="kb_d_501r_r_leg_foot_material"/>
+                                                    <!-- Link flat_foot_pad_right -->
+                                                    <body name="flat_foot_pad_right" pos="-0.113324 0.038 -0.034" quat="0.5 0.5 0.5 -0.5">
+                                                      <!-- Joint from kb_d_501r_r_leg_foot to flat_foot_pad_right -->
+                                                      <!-- Joint is "fixed", skipping it -->
+                                                      <inertial pos="-0.0195811 0.0873106 -0.00392158" mass="0.119047" fullinertia="0.000412552 5.09911e-05 0.000462284 4.92113e-06 6.74805e-10 -5.6642e-11"/>
+                                                      <!-- Part flat_foot_pad_right -->
+                                                      <geom type="mesh" class="visual" pos="0.107 0.126324 0.776" quat="1 0 -1.11022e-16 6.73446e-18" mesh="flat_foot_pad_right" material="flat_foot_pad_right_material"/>
+                                                      <geom type="mesh" class="collision" pos="0.107 0.126324 0.776" quat="1 0 -1.11022e-16 6.73446e-18" mesh="flat_foot_pad_right" material="flat_foot_pad_right_material"/>
+                                                    </body>
+                                                  </body>
+                                                  <!-- Link kb_d_502r_ankle_shaft_vis -->
+                                                  <body name="kb_d_502r_ankle_shaft_vis" pos="-0.0444096 -0.00726965 -0.02825" quat="1.93563e-15 0.707107 -0.707107 4.97768e-15">
+                                                    <!-- Joint from kc_d_402r_r_shin_idle to kb_d_502r_ankle_shaft_vis -->
+                                                    <!-- Joint is "fixed", skipping it -->
+                                                    <inertial pos="0.00669627 -0.00199121 -0.0179641" mass="0.524319" fullinertia="0.000305328 0.000732694 0.000806445 7.52247e-05 8.06553e-05 -2.85827e-05"/>
+                                                    <!-- Part kb_d_502r_ankle_shaft_vis -->
+                                                    <geom type="mesh" class="visual" pos="-0.553 -0.003 -0.1449" quat="7.01592e-16 0.707107 -2.50426e-15 -0.707107" mesh="kb_d_502r_ankle_shaft_vis" material="kb_d_502r_ankle_shaft_vis_material"/>
+                                                    <!-- Part kb_d_503x_ankle_link_s_right_vis -->
+                                                    <geom type="mesh" class="visual" pos="-0.553 -0.003 -0.1469" quat="5.47274e-15 0.707107 -3.42862e-15 -0.707107" mesh="kb_d_503x_ankle_link_s_right_vis" material="kb_d_503x_ankle_link_s_right_vis_material"/>
+                                                    <!-- Part kc_d_506r_endstop_80deg_vis -->
+                                                    <geom type="mesh" class="visual" pos="-0.553 -0.003 -0.1445" quat="3.30334e-15 0.707107 3.5987e-15 -0.707107" mesh="kc_d_506r_endstop_80deg_vis" material="kc_d_506r_endstop_80deg_vis_material"/>
+                                                    <!-- Part rs02_2 -->
+                                                    <geom type="mesh" class="visual" pos="-8.32667e-17 8.32667e-17 -0.014" quat="1 -0 -3.48835e-17 -1.52278e-16" mesh="rs02" material="rs02_material"/>
+                                                    <geom type="mesh" class="collision" pos="-8.32667e-17 8.32667e-17 -0.014" quat="1 -0 -3.48835e-17 -1.52278e-16" mesh="rs02" material="rs02_material"/>
+                                                  </body>
+                                                </body>
+                                              </body>
+                                              <!-- Link kc_d_302r_femur_lower_idle -->
+                                              <body name="kc_d_302r_femur_lower_idle" pos="-0.0195 0.021 -0.212" quat="0.5 0.5 0.5 0.5">
+                                                <!-- Joint from kc_d_301r_r_femur_lower_drive to kc_d_302r_femur_lower_idle -->
+                                                <!-- Joint is "fixed", skipping it -->
+                                                <inertial pos="-0.0182886 0.0937859 -0.0153802" mass="0.194992" fullinertia="0.00121229 0.000350534 0.00149831 9.75454e-05 -1.53243e-05 0.000124957"/>
+                                                <!-- Part kc_d_302r_femur_lower_idle -->
+                                                <geom type="mesh" class="visual" pos="-0.017 0.448 0.1455" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_302r_femur_lower_idle" material="kc_d_302r_femur_lower_idle_material"/>
+                                                <geom type="mesh" class="collision" pos="-0.017 0.448 0.1455" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_302r_femur_lower_idle" material="kc_d_302r_femur_lower_idle_material"/>
+                                                <!-- Link kc_d_403r_leg_shin_cover_vis -->
+                                                <body name="kc_d_403r_leg_shin_cover_vis" pos="0.0240615 0.0472233 -0.005" quat="1 2.77556e-17 -1.04886e-16 1.13682e-16">
+                                                  <!-- Joint from kc_d_302r_femur_lower_idle to kc_d_403r_leg_shin_cover_vis -->
+                                                  <!-- Joint is "fixed", skipping it -->
+                                                  <inertial pos="-0.0253042 -0.0447845 -0.0088849" mass="0.106204" fullinertia="6.84571e-05 9.79058e-05 0.000163043 -2.02664e-05 -2.28461e-07 4.4838e-07"/>
+                                                  <!-- Part kc_d_403r_leg_shin_cover_vis -->
+                                                  <geom type="mesh" class="visual" pos="-0.0410615 0.400777 0.1505" quat="0.5 -0.5 -0.5 -0.5" mesh="kc_d_403r_leg_shin_cover_vis" material="kc_d_403r_leg_shin_cover_vis_material"/>
+                                                </body>
+                                              </body>
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                    <!-- Link kc_d_103r_r_hip_yoke_idle -->
+                                    <body name="kc_d_103r_r_hip_yoke_idle" pos="0.0255 0.0453552 -0.02" quat="0.707107 7.23714e-17 -0.707107 -4.17863e-16">
+                                      <!-- Joint from kc_d_102r_r_hip_yoke_drive to kc_d_103r_r_hip_yoke_idle -->
+                                      <!-- Joint is "fixed", skipping it -->
+                                      <inertial pos="-0.0211701 -0.0485581 -0.0193981" mass="0.149482" fullinertia="0.000154348 0.00011857 0.000247151 -4.72284e-05 -4.24644e-06 -8.50502e-06"/>
+                                      <!-- Part kc_d_103r_r_hip_yoke_idle -->
+                                      <geom type="mesh" class="visual" pos="0.075 0.0186448 0.0255" quat="0.707107 -0.707107 0 -2.6986e-17" mesh="kc_d_103r_r_hip_yoke_idle" material="kc_d_103r_r_hip_yoke_idle_material"/>
+                                      <geom type="mesh" class="collision" pos="0.075 0.0186448 0.0255" quat="0.707107 -0.707107 0 -2.6986e-17" mesh="kc_d_103r_r_hip_yoke_idle" material="kc_d_103r_r_hip_yoke_idle_material"/>
+                                    </body>
+                                  </body>
+                                </body>
+                                <!-- Link kc_d_107r_r_cover -->
+                                <body name="kc_d_107r_r_cover" pos="-0.043 -0.0891716 -0.0295" quat="2.45327e-18 0.707107 -0 0.707107">
+                                  <!-- Joint from kc_d_101r_r_hip_static to kc_d_107r_r_cover -->
+                                  <!-- Joint is "fixed", skipping it -->
+                                  <inertial pos="-0.00992138 0.02009 0.0611129" mass="0.0189213" fullinertia="4.41114e-05 4.22942e-05 8.92243e-06 -2.61429e-08 -2.97345e-08 -3.4166e-08"/>
+                                  <!-- Part kc_d_107r_r_cover -->
+                                  <geom type="mesh" class="visual" pos="0.0295 -0.0901716 0.061" quat="0.707107 0.707107 -0 6.66462e-18" mesh="kc_d_107r_r_cover" material="kc_d_107r_r_cover_material"/>
+                                  <geom type="mesh" class="collision" pos="0.0295 -0.0901716 0.061" quat="0.707107 0.707107 -0 6.66462e-18" mesh="kc_d_107r_r_cover" material="kc_d_107r_r_cover_material"/>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <asset>
+    <mesh file="rs04urdf.stl"/>
+    <mesh file="kc_d_401l_l_shin_drive.stl"/>
+    <mesh file="flat_foot_pad_right.stl"/>
+    <mesh file="kc_d_106x_hip_bearing_pin_r_vis.stl"/>
+    <mesh file="kc_d_403l_leg_shin_cover_vis.stl"/>
+    <mesh file="kb_d_503x_ankle_link_s_right_vis.stl"/>
+    <mesh file="kc_d_402r_r_shin_idle.stl"/>
+    <mesh file="kc_d_103r_r_hip_yoke_idle.stl"/>
+    <mesh file="kb_d_502r_ankle_shaft_vis.stl"/>
+    <mesh file="kc_d_506l_endstop_80deg_vis.stl"/>
+    <mesh file="kc_d_101l_l_hip_static.stl"/>
+    <mesh file="kc_d_201l_upperthigh_act.stl"/>
+    <mesh file="kc_d_203r_thigh_roll_hardstop_vis.stl"/>
+    <mesh file="kc_d_506r_endstop_80deg_vis.stl"/>
+    <mesh file="kc_d_302l_l_femur_lower_idle.stl"/>
+    <mesh file="kc_d_302r_femur_lower_idle.stl"/>
+    <mesh file="kc_d_105r_hipyokehardstoptooth_vis.stl"/>
+    <mesh file="kc_d_105l_hipyokehardstoptooth_vis.stl"/>
+    <mesh file="kc_d_201l_upperthigh_idle.stl"/>
+    <mesh file="kc_d_403r_leg_shin_cover_vis.stl"/>
+    <mesh file="kb_d_501l_l_leg_foot.stl"/>
+    <mesh file="kc_d_107l_l_cover.stl"/>
+    <mesh file="kb_d_504x_bolt_ankle_l_vis.stl"/>
+    <mesh file="kc_d_102r_r_hip_yoke_drive.stl"/>
+    <mesh file="flat_foot_pad_left.stl"/>
+    <mesh file="kc_d_103l_l_hip_yoke_idle.stl"/>
+    <mesh file="kb_d_503x_ankle_link_s_left_vis.stl"/>
+    <mesh file="kc_d_104r_hip_yoke_hardstop_vis.stl"/>
+    <mesh file="kc_d_107r_r_cover.stl"/>
+    <mesh file="kc_d_301l_l_femur_lower_drive.stl"/>
+    <mesh file="rs02.stl"/>
+    <mesh file="kc_d_203l_thigh_roll_hardstop_vis.stl"/>
+    <mesh file="kb_d_501r_r_leg_foot.stl"/>
+    <mesh file="kb_d_502l_ankle_shaft_vis.stl"/>
+    <mesh file="rs03.stl"/>
+    <mesh file="kc_d_104_l_hip_yoke_hardstop_vis.stl"/>
+    <mesh file="kc_d_201r_upperthigh_act.stl"/>
+    <mesh file="kc_d_301r_r_femur_lower_drive.stl"/>
+    <mesh file="kc_d_402l_l_shin_idle.stl"/>
+    <mesh file="kc_d_106x_hip_bearing_pin_l_vis.stl"/>
+    <mesh file="kc_d_201r_upperthigh_idle.stl"/>
+    <mesh file="kb_d_504x_bolt_ankle_r_vis.stl"/>
+    <mesh file="kc_d_101r_r_hip_static.stl"/>
+    <mesh file="kc_d_401r_r_shin_drive.stl"/>
+    <mesh file="kc_d_102l_l_hip_yoke_drive.stl"/>
+    <material name="flat_foot_pad_left_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_501l_l_leg_foot_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_504x_bolt_ankle_l_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_402l_l_shin_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_506l_endstop_80deg_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_502l_ankle_shaft_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="rs02_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_503x_ankle_link_s_left_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_401l_l_shin_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="rs04urdf_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_302l_l_femur_lower_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_403l_leg_shin_cover_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_301l_l_femur_lower_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="rs03_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_203l_thigh_roll_hardstop_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_201l_upperthigh_act_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_201l_upperthigh_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_106x_hip_bearing_pin_l_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_102l_l_hip_yoke_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_103l_l_hip_yoke_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_105l_hipyokehardstoptooth_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_104_l_hip_yoke_hardstop_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_101l_l_hip_static_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_107l_l_cover_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_101r_r_hip_static_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_105r_hipyokehardstoptooth_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_104r_hip_yoke_hardstop_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_102r_r_hip_yoke_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_106x_hip_bearing_pin_r_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_201r_upperthigh_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_201r_upperthigh_act_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_203r_thigh_roll_hardstop_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_301r_r_femur_lower_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_401r_r_shin_drive_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_504x_bolt_ankle_r_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_402r_r_shin_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_501r_r_leg_foot_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="flat_foot_pad_right_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_502r_ankle_shaft_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kb_d_503x_ankle_link_s_right_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_506r_endstop_80deg_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_302r_femur_lower_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_403r_leg_shin_cover_vis_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_103r_r_hip_yoke_idle_material" rgba="0.262745 0.282353 0.301961 1"/>
+    <material name="kc_d_107r_r_cover_material" rgba="0.262745 0.282353 0.301961 1"/>
+  </asset>
+  <actuator>
+    <motor class="kbotv2p0" name="right_ankle_02" joint="right_ankle_02" forcerange="-17 17"/>
+    <motor class="kbotv2p0" name="right_knee_04" joint="right_knee_04" forcerange="-120 120"/>
+    <motor class="kbotv2p0" name="right_hip_yaw_03" joint="right_hip_yaw_03" forcerange="-60 60"/>
+    <motor class="kbotv2p0" name="right_hiproll_03" joint="right_hiproll_03" forcerange="-60 60"/>
+    <motor class="kbotv2p0" name="right_hippitch_04" joint="right_hippitch_04" forcerange="-120 120"/>
+    <motor class="kbotv2p0" name="left_hippitch_04" joint="left_hippitch_04" forcerange="-120 120"/>
+    <motor class="kbotv2p0" name="left_hiproll_03" joint="left_hiproll_03" forcerange="-60 60"/>
+    <motor class="kbotv2p0" name="left_hip_yaw_03" joint="left_hip_yaw_03" forcerange="-60 60"/>
+    <motor class="kbotv2p0" name="left_knee_04" joint="left_knee_04" forcerange="-120 120"/>
+    <motor class="kbotv2p0" name="left_ankle_02" joint="left_ankle_02" forcerange="-17 17"/>
+  </actuator>
+  <equality/>
+</mujoco>
