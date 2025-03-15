@@ -3,3 +3,4 @@
 mujoco
 numpy
 matplotlib
+onshape-to-robot
