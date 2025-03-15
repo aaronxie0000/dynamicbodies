@@ -5,6 +5,11 @@ import numpy as np
 import json
 from pathlib import Path
 import os
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(format="\033[93m%(levelname)s:\033[0m %(message)s", level=logging.WARNING)
+logging.basicConfig(format="\033[92m%(levelname)s:\033[0m %(message)s", level=logging.INFO)
 
 
 def load_model(xml_path):
@@ -26,7 +31,7 @@ def load_model(xml_path):
     return model, data
 
 
-def create_key_callback(data, model, applying_force_ref, viewer_ref, custom_actions=None):
+def create_key_callback(data, model, applying_force_ref, viewer_ref):
     """
     Create a key callback function for the MuJoCo viewer.
     
@@ -47,11 +52,11 @@ def create_key_callback(data, model, applying_force_ref, viewer_ref, custom_acti
         if char_key == 'R':
             # Reset to initial state
             mujoco.mj_resetData(model, data)
-            print("Reset simulation")
+            logger.info("Reset simulation")
         elif char_key == 'Z':
             # Toggle force application
             applying_force_ref[0] = not applying_force_ref[0]
-            print(f"Applying force: {applying_force_ref[0]}")
+            logger.info(f"Applying force: {applying_force_ref[0]}")
         elif char_key == 'V':
             # Toggle frame visualization
             if viewer_ref[0].opt.frame == 7:
@@ -59,15 +64,14 @@ def create_key_callback(data, model, applying_force_ref, viewer_ref, custom_acti
             else:
                 viewer_ref[0].opt.frame = 7
             viewer_ref[0].sync()
-            print("Toggled frame visualization")
+            logger.info("Toggled frame visualization")
         elif char_key == ' ':
-            data.qpos[2] = 2  # Set height of root to 2 meters
-            data.qvel[:] = 0  # Reset velocities
-            print("Drop from height")
-        
-        # Execute custom actions if provided
-        if custom_actions and char_key in custom_actions:
-            custom_actions[char_key]()
+            if len(data.qpos) >= 3: 
+                data.qpos[2] = 2  # Set height of root to 2 meters
+                data.qvel[:] = 0  # Reset velocities
+                logger.info("Drop from height")
+            else:
+                logger.warning("Root link is not free")
     
     return key_callback
 

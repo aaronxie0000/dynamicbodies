@@ -8,16 +8,14 @@ import argparse
 def main():
     """Run the actuated pendulum or humanoid robot simulation using mjpython."""
     parser = argparse.ArgumentParser(description='Run a simulation.')
-    parser.add_argument('--pend', action='store_true', help='Run the actuated pendulum simulation.')
-    parser.add_argument('--humanoid', action='store_true', help='Run the humanoid robot simulation.')
+    parser.add_argument('--body', choices=['pend', 'humanoid'], default='pend', help='Choose the example to run.')
     args = parser.parse_args()
 
-    if args.pend:
+    if args.body == 'pend':
         cmd = ["mjpython", "-m", "dynamic_body_sim.actuated_pendulum.main"]
-    elif args.humanoid:
+    elif args.body == 'humanoid':
         cmd = ["mjpython", "-m", "dynamic_body_sim.humanoid_robot.main"]
     else:
-        print("No simulation selected. Please specify either --pend or --humanoid.", file=sys.stderr)
         return 1
 
     # Execute the command and return the exit code

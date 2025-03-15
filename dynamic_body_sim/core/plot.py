@@ -68,11 +68,11 @@ def create_force_plots(data):
 def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Plot force data from simulation')
-    parser.add_argument('--data', choices=['pend', 'robot'], default='pend')
+    parser.add_argument('--body', choices=['pend', 'humanoid'], default='pend')
     args = parser.parse_args()
     
     # Determine which JSON file to use based on the argument
-    data_file = 'dynamic_body_sim/actuated_pendulum/data/pendulum_data.json' if args.data == 'pend' else 'dynamic_body_sim/humanoid_robot/data/kbot_data.json'
+    data_file = 'dynamic_body_sim/actuated_pendulum/data/pendulum_data.json' if args.body == 'pend' else 'dynamic_body_sim/humanoid_robot/data/kbot_data.json'
     print(f"Using data from {data_file}")
     
     # Load the data
