@@ -38,5 +38,7 @@
             "frictionloss": 0.1,
             "forcerange": 120
         }
-    }
+    },
+
+    "additional_xml": "edits.xml"
 }
