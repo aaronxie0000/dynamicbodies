@@ -1,0 +1,26 @@
+{
+    "url": "https://cad.onshape.com/documents/99d3ef7e6f60626cd10a965a/w/6f325a12be1bd12a2348a750/e/f80e459e066978edc186ec44",
+    "output_format": "mujoco",
+
+    "merge_stl": true,
+    "color": [0.262745, 0.282353, 0.301961],
+    "robot_name": "rhoban_test",
+
+    "ignore": {
+        "*_vis*": "collision"
+    },
+
+    "joint_properties": {
+        "default": {
+            "type": "motor",
+            "frictionloss": 0.1,
+            "armature": 0.005,
+            "damping": 1
+        },
+        "*_02*": {
+            "type": "motor",
+            "frictionloss": 0.5,
+            "armature": 0.01
+        }
+    }
+}

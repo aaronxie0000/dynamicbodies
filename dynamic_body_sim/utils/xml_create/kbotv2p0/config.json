@@ -1,0 +1,42 @@
+{
+    "url": "https://cad.onshape.com/documents/c4234bd597023ccafc0d4697/w/65ea27f58ce9e083d28137a0/e/300729515391a3d6b13dd23f",
+    "output_format": "mujoco",
+
+    "merge_stl": true,
+    "color": [0.262745, 0.282353, 0.301961],
+    "robot_name": "kbotv2p0",
+
+    "ignore": {
+        "*_vis*": "collision"
+    },
+
+    "joint_properties": {
+        "default": {
+            "type": "motor"
+        },
+        "*_00*": {
+            "type": "motor",
+            "armature": 0.0005,
+            "frictionloss": 0.1,
+            "forcerange": 14
+        },
+        "*_02*": {
+            "type": "motor",
+            "armature": 0.002,
+            "frictionloss": 0.1,
+            "forcerange": 17
+        },
+        "*_03*": {
+            "type": "motor",
+            "armature": 0.005,
+            "frictionloss": 0.3,
+            "forcerange": 60
+        },
+        "*_04*": {
+            "type": "motor",
+            "armature": 0.007,
+            "frictionloss": 0.1,
+            "forcerange": 120
+        }
+    }
+}

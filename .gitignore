@@ -14,9 +14,7 @@ __pycache__/
 
 # Development
 scratch/
-
-# Data
-*.json
+data/
 
 # Build artifacts
 build/
