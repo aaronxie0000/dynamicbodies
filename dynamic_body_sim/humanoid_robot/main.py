@@ -14,19 +14,19 @@ def humanoid_data_recorder(data, model, sim_time):
     """
     return {
         "time": sim_time,
-        "base_pos": data.sensor("base_link_pos").data.tolist(),
+        "base_pos (m)": data.sensor("base_link_pos").data.tolist(),
         # "base_quat": data.sensor("base_link_quat").data.tolist(),
         # "base_vel": data.sensor("base_link_vel").data.tolist(),
         # "base_ang_vel": data.sensor("base_link_ang_vel").data.tolist(),
         # "imu_acc": data.sensor("imu_acc").data.tolist(),
         # "imu_gyro": data.sensor("imu_gyro").data.tolist(),
-        "force_sensor": data.sensor("force_sensor").data.tolist(),
+        "force_sensor (N)": data.sensor("force_sensor").data.tolist(),
 
-        "kc_d_302r_femur_lower_idle Torques": data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[:3],
-        "kc_d_302r_femur_lower_idle Forces": data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[3:],
-        "kc_d_302r_femur_lower_idle Force X": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[3]],
-        "kc_d_302r_femur_lower_idle Force Y": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[4]],
-        "kc_d_302r_femur_lower_idle Force Z": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[5]]
+        "kc_d_302r_femur_lower_idle Torques (Nm)": data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[:3],
+        "kc_d_302r_femur_lower_idle Forces (N)": data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[3:],
+        "kc_d_302r_femur_lower_idle Force X (N)": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[3]],
+        "kc_d_302r_femur_lower_idle Force Y (N)": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[4]],
+        "kc_d_302r_femur_lower_idle Force Z (N)": [data.body("kc_d_302r_femur_lower_idle").cfrc_int.tolist()[5]]
     }
 
 def humanoid_viewer_setup(viewer):

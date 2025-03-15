@@ -120,11 +120,11 @@ def average_data(data, window_size, threshold=10.0):
     return averaged_data
 
 
-def plot_forces(ax, forces, times, title_prefix):
+def plot_forces(ax, data, times, title_prefix):
     """Plot force components in a subplot."""
-    num_components = len(forces[0])
+    num_components = len(data[0])
     for i in range(num_components):
-        force_component = [force[i] for force in forces]
+        force_component = [force[i] for force in data]
         ax.plot(times, force_component)
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Force')
@@ -157,8 +157,8 @@ def create_force_plots(data):
             ax = axs[row, col] if rows > 1 else axs[col]
         else:
             ax = axs[0]
-        forces = [entry[key] for entry in data]
-        plot_forces(ax, forces, times, key.replace('_', ' ').title())
+        data_points = [entry[key] for entry in data]
+        plot_forces(ax, data_points, times, key.replace('_', ' ').title())
 
     # Hide any unused subplots
     if num_plots > 1:
