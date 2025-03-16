@@ -29,7 +29,7 @@ def main():
         force_magnitude=[0.0, 0.0, 100.0],
         body_queried="kc_d_302r_femur_lower_idle",
         control_function=humanoid_control_function,
-        additional_quries=additional_data
+        additional_queries=additional_data
     )
 
 if __name__ == "__main__":

@@ -98,7 +98,7 @@ def force_simulation(
     body_queried="world",
     force_sensor_name="force_sensor",
     control_function=None,
-    additional_quries={}
+    additional_queries={}
 ):
     """
     Run a MuJoCo simulation with the given parameters.
@@ -111,7 +111,7 @@ def force_simulation(
         timestep (float, optional): Simulation timestep
         body_queried (str, optional): Name of the body to check force interaction
         control_function (function, optional): Function to compute control signals
-        additional_quries (dict, optional): Dictionary of additional data to record
+        additional_queries (dict, optional): Dictionary of additional data to record
     """
     # Get the absolute path to the model file
     path = Path(model_path)
@@ -167,9 +167,8 @@ def force_simulation(
             }
 
             # Add additional data fields
-            if additional_quries:
-                for key, expression in additional_quries.items():
-                    sensor_data[key] = eval(expression)
+            for key, expression in additional_queries.items():
+                sensor_data[key] = eval(expression)
 
             recorded_data.append(sensor_data)
             

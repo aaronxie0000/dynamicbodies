@@ -24,7 +24,7 @@ def main():
         force_magnitude=[100.0, 0.0, 0.0],
         body_queried="toplink",
         control_function=pendulum_control_function,
-        additional_quries={
+        additional_queries={
             "internal_force_bottomlink": "data.body('bottomlink').cfrc_int.tolist()",
             "external_force_bottomlink": "data.body('bottomlink').cfrc_ext.tolist()",
         }
