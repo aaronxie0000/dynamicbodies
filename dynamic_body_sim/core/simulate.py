@@ -5,44 +5,10 @@ import numpy as np
 import json
 from pathlib import Path
 import os
-import logging
+from dynamic_body_sim.core.utils import setup_logger
 
-# Define ANSI escape sequences for colors
-RESET = "\033[0m"
-YELLOW = "\033[93m"
-RED = "\033[91m"
-BLUE = "\033[94m"
-
-class CustomFormatter(logging.Formatter):
-    """Custom logging formatter to colorize log messages based on severity."""
-    
-    def format(self, record):
-        # Customize the color based on the log level
-        if record.levelno == logging.INFO:
-            levelname_color = f"{BLUE}{record.levelname}{RESET}"
-            record.msg = f"{BLUE}{record.msg}{RESET}"
-        elif record.levelno == logging.WARNING:
-            levelname_color = f"{RED}{record.levelname}{RESET}"
-            record.msg = f"{RED}{record.msg}{RESET}"
-        else:
-            levelname_color = record.levelname
-        
-        # Update the levelname in the record
-        record.levelname = levelname_color
-        return super().format(record)
-
-# Setup logger with the custom formatter
-logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-handler.setFormatter(CustomFormatter(
-    fmt="%(levelname)s: [%(name)s] %(message)s"
-))
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)  # Set default level to INFO
-
-# Remove the default handler to prevent duplicate messages
-logger.propagate = False
-
+# Setup logger using the utility function
+logger = setup_logger(__name__)
 
 def load_model(xml_path):
     """
@@ -107,16 +73,32 @@ def create_key_callback(data, model, applying_force_ref, viewer_ref):
     
     return key_callback
 
+def check_force_interaction(model, body_queried):
+    """
+    Goes through kinematic tree and based on which body is being queried,
+    returns the two bodies of which's interaction force is being recorded. 
 
-def run_simulation(
+    Args:
+        body_queried (str): Name of the body to check
+        xml_path (str): Path to the XML file
+    """
+    body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, body_queried)
+    parent_id = model.body_parentid[body_id]
+    parent_name = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_BODY, parent_id)
+
+    logger.info(f"Force measured between: --- {body_queried} --- AND --- {parent_name} ---")
+
+
+
+def force_simulation(
     model_path,
     output_file,
     force_body_name=None,
     force_magnitude=[10.0, 0.0, 0.0],
-    timestep=0.001,
-    data_recorder=None,
+    body_queried="world",
+    force_sensor_name="force_sensor",
     control_function=None,
-    viewer_setup=None
+    additional_quries={}
 ):
     """
     Run a MuJoCo simulation with the given parameters.
@@ -127,17 +109,16 @@ def run_simulation(
         force_body_name (str, optional): Name of the body to apply force to
         force_magnitude (list, optional): Force vector to apply [x, y, z]
         timestep (float, optional): Simulation timestep
-        data_recorder (function, optional): Function to record data at each timestep
-        custom_key_actions (dict, optional): Dictionary of custom key actions
+        body_queried (str, optional): Name of the body to check force interaction
         control_function (function, optional): Function to compute control signals
-        viewer_setup (function, optional): Function to set up the viewer
+        additional_quries (dict, optional): Dictionary of additional data to record
     """
     # Get the absolute path to the model file
     path = Path(model_path)
     model, data = load_model(path)
     
     # Set simulation parameters
-    model.opt.timestep = timestep
+    model.opt.timestep = 0.001 # 1000 hz
     
     # Set up force application
     applying_force = [False]  # Use a list to allow modification in the callback
@@ -155,9 +136,7 @@ def run_simulation(
     with mujoco.viewer.launch_passive(model, data, key_callback=key_cb) as viewer:
         viewer_ref[0] = viewer
         
-        # Apply custom viewer setup if provided
-        if viewer_setup:
-            viewer_setup(viewer)
+        viewer.opt.flags[mujoco.mjtVisFlag.mjVIS_COM] = True
         
         target_time = time.time()
         sim_time = 0.0
@@ -173,11 +152,26 @@ def run_simulation(
             # Apply external force if enabled
             if applying_force[0] and apply_force_body is not None:
                 data.xfrc_applied[apply_force_body, :3] = force_magnitude
+
+            if sim_time < 0.001:
+                check_force_interaction(model, body_queried)
             
-            # Record data if recorder is provided
-            if data_recorder:
-                sensor_data = data_recorder(data, model, sim_time)
-                recorded_data.append(sensor_data)
+            sensor_data = {
+                "time": sim_time,
+                "force_sensor (N)": data.sensor(force_sensor_name).data.tolist(),
+                f"{body_queried} Torques (Nm)": data.body(body_queried).cfrc_int.tolist()[:3],
+                f"{body_queried} Forces (N)": data.body(body_queried).cfrc_int.tolist()[3:],
+                f"{body_queried} Force X (N)": [data.body(body_queried).cfrc_int.tolist()[3]],
+                f"{body_queried} Force Y (N)": [data.body(body_queried).cfrc_int.tolist()[4]],
+                f"{body_queried} Force Z (N)": [data.body(body_queried).cfrc_int.tolist()[5]]
+            }
+
+            # Add additional data fields
+            if additional_quries:
+                for key, expression in additional_quries.items():
+                    sensor_data[key] = eval(expression)
+
+            recorded_data.append(sensor_data)
             
             # Step simulation
             mujoco.mj_step(model, data)
