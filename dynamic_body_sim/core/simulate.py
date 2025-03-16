@@ -7,9 +7,41 @@ from pathlib import Path
 import os
 import logging
 
+# Define ANSI escape sequences for colors
+RESET = "\033[0m"
+YELLOW = "\033[93m"
+RED = "\033[91m"
+BLUE = "\033[94m"
+
+class CustomFormatter(logging.Formatter):
+    """Custom logging formatter to colorize log messages based on severity."""
+    
+    def format(self, record):
+        # Customize the color based on the log level
+        if record.levelno == logging.INFO:
+            levelname_color = f"{BLUE}{record.levelname}{RESET}"
+            record.msg = f"{BLUE}{record.msg}{RESET}"
+        elif record.levelno == logging.WARNING:
+            levelname_color = f"{RED}{record.levelname}{RESET}"
+            record.msg = f"{RED}{record.msg}{RESET}"
+        else:
+            levelname_color = record.levelname
+        
+        # Update the levelname in the record
+        record.levelname = levelname_color
+        return super().format(record)
+
+# Setup logger with the custom formatter
 logger = logging.getLogger(__name__)
-logging.basicConfig(format="\033[93m%(levelname)s:\033[0m %(message)s", level=logging.WARNING)
-logging.basicConfig(format="\033[92m%(levelname)s:\033[0m %(message)s", level=logging.INFO)
+handler = logging.StreamHandler()
+handler.setFormatter(CustomFormatter(
+    fmt="%(levelname)s: [%(name)s] %(message)s"
+))
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)  # Set default level to INFO
+
+# Remove the default handler to prevent duplicate messages
+logger.propagate = False
 
 
 def load_model(xml_path):
@@ -137,7 +169,7 @@ def run_simulation(
             # Apply control if provided
             if control_function:
                 data.ctrl = control_function(data, model)
-            
+
             # Apply external force if enabled
             if applying_force[0] and apply_force_body is not None:
                 data.xfrc_applied[apply_force_body, :3] = force_magnitude
@@ -169,4 +201,4 @@ def run_simulation(
             with open(output_file, "w") as f:
                 json.dump(recorded_data, f, indent=4)
             
-            print(f"Data saved to {output_file} with {len(recorded_data)} timesteps")
+            logger.info(f"Data saved to {output_file} with {len(recorded_data)} timesteps")

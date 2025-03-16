@@ -44,7 +44,7 @@ def main():
         model_path=model_path,
         output_file=output_file,
         force_body_name="kc_d_401l_l_shin_drive",
-        force_magnitude=[20.0, 0.0, 0.0],
+        force_magnitude=[0.0, 0.0, 100.0],
         timestep=0.001,
         data_recorder=humanoid_data_recorder,
         control_function=humanoid_control_function,
