@@ -5,7 +5,7 @@ import numpy as np
 import json
 from pathlib import Path
 import os
-from dynamic_body_sim.core.utils import setup_logger
+from dynamic_body_sim.dynamic_body_sim.utils import setup_logger
 
 # Setup logger using the utility function
 logger = setup_logger(__name__)

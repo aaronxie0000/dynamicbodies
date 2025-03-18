@@ -1,8 +1,8 @@
 import numpy as np
 from pathlib import Path
-from dynamic_body_sim.core.simulate import force_simulation
-from dynamic_body_sim.core.simulate import mujoco
-from dynamic_body_sim.core.motion_controller import compute_torque
+from dynamic_body_sim.dynamic_body_sim.simulate import force_simulation
+from dynamic_body_sim.dynamic_body_sim.simulate import mujoco
+from dynamic_body_sim.dynamic_body_sim.motion_controller import compute_torque
 
 
 def pendulum_control_function(data, model):

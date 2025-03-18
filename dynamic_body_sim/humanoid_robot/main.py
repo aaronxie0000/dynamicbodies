@@ -1,6 +1,6 @@
 from pathlib import Path
 import numpy as np
-from dynamic_body_sim.core.simulate import force_simulation
+from dynamic_body_sim.dynamic_body_sim.simulate import force_simulation
 
 def humanoid_control_function(data, model):
     """
