@@ -154,7 +154,7 @@ def main():
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Plot force data from simulation')
     parser.add_argument('--body', choices=['pend', 'humanoid'], default='pend')
-    parser.add_argument('--window', type=float, default=0.1, help='Time window (in seconds) for averaging data points')
+    parser.add_argument('--window', type=float, default=0.01, help='Time window (in seconds) for averaging data points')
     parser.add_argument('--threshold', type=float, default=10.0, help='Threshold for significant change detection')
     args = parser.parse_args()
     
